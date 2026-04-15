@@ -57,17 +57,19 @@ Each normalized item uses this schema:
 ## How To Run
 
 1. Install Python 3.10+.
-2. Install optional packages:
+2. Install packages:
 
 ```powershell
-pip install requests beautifulsoup4 pyyaml python-dotenv
+pip install -r requirements.txt
 ```
 
-3. Create a `.env` file in the project root:
+3. Optionally create a `.env` file in the project root:
 
 ```env
 OPENAI_API_KEY=your_api_key_here
 ```
+
+If `OPENAI_API_KEY` is not set, the project still runs and falls back to local summaries.
 
 4. Run the pipeline:
 
@@ -80,6 +82,28 @@ The script writes:
 - raw source snapshots into `data/raw/`
 - normalized and ranked results into `data/processed/`
 - a report like `reports/YYYY-MM-DD.md`
+
+## GitHub Automation
+
+The repository includes a GitHub Actions workflow at `.github/workflows/daily-report.yml`.
+
+- It runs daily at `06:50` in the `Asia/Seoul` timezone.
+- It executes `python scripts/run_pipeline.py`.
+- It builds a static site from `reports/*.md` with `python scripts/build_pages.py`.
+- It deploys the generated `site/` folder to GitHub Pages.
+
+To enable web access for reports:
+
+1. Push the workflow to GitHub.
+2. Open `Settings -> Pages`.
+3. Set the source to `GitHub Actions`.
+4. Run the workflow once with `workflow_dispatch` or wait for the next schedule.
+
+After the first deployment, the report site will be available at:
+
+```text
+https://<your-github-username>.github.io/<your-repository-name>/
+```
 
 ## Notes
 
