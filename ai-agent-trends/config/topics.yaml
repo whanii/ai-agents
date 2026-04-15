@@ -1,0 +1,20 @@
+{
+  "topics": [
+    {
+      "name": "AI Agent & Automation",
+      "keywords": ["agent", "agents", "autonomous", "multi-agent", "workflow agent", "ai assistant", "automation", "automate", "ops", "workflow", "case study", "use case", "deployment"]
+    },
+    {
+      "name": "MCP / tool use / skills",
+      "keywords": ["mcp", "model context protocol", "tool use", "function calling", "skills", "plugin", "tooling"]
+    },
+    {
+      "name": "AI Security",
+      "keywords": ["security architecture", "architecture review", "secure design", "security review", "zero trust"]
+    },
+    {
+      "name": "threat modeling",
+      "keywords": ["threat modeling", "threat model", "attack path", "abuse case", "red team", "risk analysis"]
+    }
+  ]
+}

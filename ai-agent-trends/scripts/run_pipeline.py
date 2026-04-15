@@ -1,0 +1,90 @@
+from __future__ import annotations
+
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List
+
+from deduplicate import deduplicate_items
+from fetch_github_trending import fetch_items as fetch_github_trending
+from fetch_hn import fetch_items as fetch_hn
+from fetch_news import fetch_items as fetch_news
+from fetch_reddit import fetch_items as fetch_reddit
+from normalize import load_config, normalize_items, write_json
+from rank_items import rank_items
+from summarize_items import build_report_markdown, enrich_summaries, report_filename, write_report
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+CONFIG_DIR = ROOT_DIR / "config"
+DATA_RAW_DIR = ROOT_DIR / "data" / "raw"
+DATA_PROCESSED_DIR = ROOT_DIR / "data" / "processed"
+REPORTS_DIR = ROOT_DIR / "reports"
+
+
+def run_pipeline() -> Dict[str, Any]:
+    # Load lightweight JSON-compatible YAML configs from the repo.
+    topics_config = load_config(CONFIG_DIR / "topics.yaml")
+    sources_config = load_config(CONFIG_DIR / "sources.yaml")
+    schedule_config = load_config(CONFIG_DIR / "schedule.yaml")
+
+    raw_collections = collect_all_sources(sources_config)
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    write_json(DATA_RAW_DIR / f"raw-{timestamp}.json", raw_collections)
+
+    # Flatten source-specific collections into one common processing stream.
+    flattened_raw = [item for source_items in raw_collections.values() for item in source_items]
+    normalized = normalize_items(flattened_raw, topics_config)
+    deduplicated = deduplicate_items(normalized)
+    ranked = rank_items(enrich_summaries(deduplicated))
+
+    write_json(DATA_PROCESSED_DIR / f"normalized-{timestamp}.json", normalized)
+    write_json(DATA_PROCESSED_DIR / f"ranked-{timestamp}.json", ranked)
+
+    now = datetime.now()
+    report_name = report_filename(now)
+    report_path = REPORTS_DIR / report_name
+    # Always emit a report, even when upstream fetchers had to fall back to mock items.
+    write_report(report_path, build_report_markdown(ranked))
+
+    return {
+        "raw_count": len(flattened_raw),
+        "normalized_count": len(normalized),
+        "deduplicated_count": len(deduplicated),
+        "ranked_count": len(ranked),
+        "report_path": str(report_path),
+    }
+
+
+def collect_all_sources(sources_config: Dict[str, Any]) -> Dict[str, List[Dict[str, Any]]]:
+    collections: Dict[str, List[Dict[str, Any]]] = {}
+
+    if sources_config.get("github_trending", {}).get("enabled", True):
+        collections["github_trending"] = fetch_github_trending(sources_config.get("github_trending", {}))
+    else:
+        collections["github_trending"] = []
+
+    if sources_config.get("hacker_news", {}).get("enabled", True):
+        collections["hacker_news"] = fetch_hn(sources_config.get("hacker_news", {}))
+    else:
+        collections["hacker_news"] = []
+
+    if sources_config.get("reddit", {}).get("enabled", True):
+        collections["reddit"] = fetch_reddit(sources_config.get("reddit", {}))
+    else:
+        collections["reddit"] = []
+
+    if sources_config.get("rss_news", {}).get("enabled", True):
+        collections["rss_news"] = fetch_news(sources_config.get("rss_news", {}))
+    else:
+        collections["rss_news"] = []
+
+    return collections
+
+
+if __name__ == "__main__":
+    result = run_pipeline()
+    print("Pipeline completed.")
+    print(f"Raw items: {result['raw_count']}")
+    print(f"Normalized items: {result['normalized_count']}")
+    print(f"Deduplicated items: {result['deduplicated_count']}")
+    print(f"Ranked items: {result['ranked_count']}")
+    print(f"Report: {result['report_path']}")
