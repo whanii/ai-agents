@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime
+import getpass
+import os
 from pathlib import Path
+import shutil
 from typing import Any, Dict, List
 
 from deduplicate import deduplicate_items
@@ -21,6 +24,8 @@ REPORTS_DIR = ROOT_DIR / "reports"
 
 
 def run_pipeline() -> Dict[str, Any]:
+    log_runtime_context()
+
     # Load lightweight JSON-compatible YAML configs from the repo.
     topics_config = load_config(CONFIG_DIR / "topics.yaml")
     sources_config = load_config(CONFIG_DIR / "sources.yaml")
@@ -52,6 +57,23 @@ def run_pipeline() -> Dict[str, Any]:
         "ranked_count": len(ranked),
         "report_path": str(report_path),
     }
+
+
+def log_runtime_context() -> None:
+    path_entries = os.getenv("PATH", "").split(os.pathsep)
+    codex_path_entries = [entry for entry in path_entries if "codex" in entry.lower() or "npm" in entry.lower()]
+
+    print("Runtime context:")
+    print(f"  user: {getpass.getuser()}")
+    print(f"  cwd: {Path.cwd()}")
+    print(f"  HOME: {os.getenv('HOME', '')}")
+    print(f"  USERPROFILE: {os.getenv('USERPROFILE', '')}")
+    print(f"  CODEX_CLI_PATH: {os.getenv('CODEX_CLI_PATH', '')}")
+    print(f"  CODEX_HOME: {os.getenv('CODEX_HOME', '')}")
+    print(f"  which codex: {shutil.which('codex') or ''}")
+    print(f"  which codex.cmd: {shutil.which('codex.cmd') or ''}")
+    print(f"  which codex.exe: {shutil.which('codex.exe') or ''}")
+    print(f"  PATH codex/npm entries: {', '.join(codex_path_entries) if codex_path_entries else '(none)'}")
 
 
 def collect_all_sources(sources_config: Dict[str, Any]) -> Dict[str, List[Dict[str, Any]]]:

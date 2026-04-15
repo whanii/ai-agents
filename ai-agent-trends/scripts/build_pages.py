@@ -7,8 +7,8 @@ from typing import Iterable, List
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 REPORTS_DIR = ROOT_DIR / "reports"
-SITE_DIR = ROOT_DIR / "site"
-SITE_REPORTS_DIR = SITE_DIR / "reports"
+DOCS_DIR = ROOT_DIR.parent / "docs"
+DOCS_REPORTS_DIR = DOCS_DIR / "reports"
 
 
 def build_pages() -> List[Path]:
@@ -17,7 +17,7 @@ def build_pages() -> List[Path]:
         reverse=True,
     )
 
-    SITE_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    DOCS_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     written_files: List[Path] = []
 
     for report_path in report_paths:
@@ -28,16 +28,16 @@ def build_pages() -> List[Path]:
             description=f"{report_path.stem} generated AI trend report.",
             home_href="../index.html",
         )
-        output_path = SITE_REPORTS_DIR / f"{report_path.stem}.html"
+        output_path = DOCS_REPORTS_DIR / f"{report_path.stem}.html"
         output_path.write_text(report_html, encoding="utf-8")
         written_files.append(output_path)
 
     index_html = _build_index_page(report_paths)
-    index_path = SITE_DIR / "index.html"
+    index_path = DOCS_DIR / "index.html"
     index_path.write_text(index_html, encoding="utf-8")
     written_files.append(index_path)
 
-    nojekyll_path = SITE_DIR / ".nojekyll"
+    nojekyll_path = DOCS_DIR / ".nojekyll"
     nojekyll_path.write_text("", encoding="utf-8")
     written_files.append(nojekyll_path)
 
@@ -51,8 +51,8 @@ def _build_index_page(report_paths: Iterable[Path]) -> str:
     hero_html = [
         "<section class='hero'>",
         "<p class='eyebrow'>AI Agent Trends</p>",
-        "<h1>Daily trend reports published from GitHub Actions</h1>",
-        "<p class='lede'>Windows local runs can continue as-is, and GitHub now has a web-friendly report surface for scheduled publishing.</p>",
+        "<h1>Daily trend reports published from a Windows scheduler</h1>",
+        "<p class='lede'>Reports are generated on the local Windows machine, committed to GitHub, and served through GitHub Pages.</p>",
         "</section>",
     ]
 
@@ -82,7 +82,7 @@ def _build_index_page(report_paths: Iterable[Path]) -> str:
     return _wrap_page(
         title="AI Trend Reports",
         content_html=content_html,
-        description="Automated AI trend reports published with GitHub Actions and GitHub Pages.",
+        description="Automated AI trend reports published from a Windows scheduler and served with GitHub Pages.",
         home_href="index.html",
     )
 
@@ -334,4 +334,4 @@ def _inline_markdown(text: str) -> str:
 
 if __name__ == "__main__":
     outputs = build_pages()
-    print(f"Built {len(outputs)} files into {SITE_DIR}")
+    print(f"Built {len(outputs)} files into {DOCS_DIR}")

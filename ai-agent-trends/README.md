@@ -82,28 +82,36 @@ The script writes:
 - raw source snapshots into `data/raw/`
 - normalized and ranked results into `data/processed/`
 - a report like `reports/YYYY-MM-DD.md`
+- a GitHub Pages-ready site into the repository root `docs/` folder when `python scripts/build_pages.py` is run
 
-## GitHub Automation
+## Local Publishing Workflow
 
-The repository includes a GitHub Actions workflow at `.github/workflows/daily-report.yml`.
+The recommended production setup is:
 
-- It runs daily at `06:50` in the `Asia/Seoul` timezone.
-- It executes `python scripts/run_pipeline.py`.
-- It builds a static site from `reports/*.md` with `python scripts/build_pages.py`.
-- It deploys the generated `site/` folder to GitHub Pages.
+- Windows Task Scheduler runs `run_daily_report.bat`
+- the batch file runs `python scripts/run_pipeline.py`
+- it builds a static site from `reports/*.md` with `python scripts/build_pages.py`
+- it stages `reports/` and the repository root `docs/`, commits changes, and pushes to `main`
+- GitHub Pages serves the repository root `docs/` folder
 
-To enable web access for reports:
+To publish reports to the web:
 
-1. Push the workflow to GitHub.
+1. Push this repository to GitHub.
 2. Open `Settings -> Pages`.
-3. Set the source to `GitHub Actions`.
-4. Run the workflow once with `workflow_dispatch` or wait for the next schedule.
+3. Set the source to `Deploy from a branch`.
+4. Choose the `main` branch and the `/docs` folder.
+5. Run `run_daily_report.bat` locally once and confirm it pushes updated `reports/` and `docs/`.
 
-After the first deployment, the report site will be available at:
+After the first push, the report site will be available at:
 
 ```text
 https://<your-github-username>.github.io/<your-repository-name>/
 ```
+
+## Optional GitHub Action
+
+The repository still includes `.github/workflows/daily-report.yml`, but it is now manual-only with `workflow_dispatch`.
+It can be used as a fallback test run, but the primary publishing path is the local Windows scheduler.
 
 ## Notes
 

@@ -2,9 +2,6 @@ name: Daily AI Trend Report
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "50 6 * * *"
-      timezone: "Asia/Seoul"
 
 permissions:
   contents: read
@@ -47,7 +44,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ai-agent-trends/site
+          path: docs
 
   deploy:
     needs: build

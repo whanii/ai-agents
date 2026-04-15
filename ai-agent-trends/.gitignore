@@ -1,9 +1,11 @@
 .env
 __pycache__/
 *.pyc
+codex-summary-*.txt
 logs/**
 !logs/.gitkeep
 site/**
+docs/**
 
 data/**
 !data/.gitkeep
@@ -11,6 +13,3 @@ data/**
 !data/raw/.gitkeep
 !data/processed/
 !data/processed/.gitkeep
-
-reports/**
-!reports/.gitkeep

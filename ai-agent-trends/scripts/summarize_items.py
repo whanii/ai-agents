@@ -5,7 +5,10 @@ from datetime import datetime
 import json
 import os
 from pathlib import Path
-from typing import Dict, Iterable, List
+import shutil
+import subprocess
+import tempfile
+from typing import Dict, Iterable, List, Tuple
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -28,6 +31,11 @@ TOPIC_PRIORITY = [
     "threat modeling",
     "MCP / tool use / skills",
 ]
+SUMMARY_PROVIDER_LABELS = {
+    "openai": "OpenAI API",
+    "codex_cli": "Codex CLI",
+    "fallback": "Fallback",
+}
 
 
 def _load_environment() -> None:
@@ -40,9 +48,16 @@ def enrich_summaries(items: Iterable[Dict[str, object]]) -> List[Dict[str, objec
     enriched: List[Dict[str, object]] = []
     for item in items:
         updated = dict(item)
-        summary = str(item.get("summary", "")).strip()
-        if not summary:
-            updated["summary"] = _generate_summary(item)
+        source_summary = str(item.get("summary", "")).strip()
+        if source_summary:
+            updated["source_summary"] = source_summary
+
+        generated_summary, provider, provider_detail, attempts = _generate_summary(updated)
+        updated["summary"] = generated_summary
+        updated["summary_provider"] = provider
+        updated["summary_provider_detail"] = provider_detail
+        updated["openai_attempt_detail"] = attempts["openai"]
+        updated["codex_cli_attempt_detail"] = attempts["codex_cli"]
         enriched.append(updated)
     return enriched
 
@@ -50,8 +65,12 @@ def enrich_summaries(items: Iterable[Dict[str, object]]) -> List[Dict[str, objec
 def build_report_markdown(items: List[Dict[str, object]]) -> str:
     selected_items = _select_report_items(items)
     grouped = _group_by_primary_topic(selected_items)
+    debug_lines = _build_debug_lines(selected_items)
 
     lines: List[str] = ["# AI Trend Report", ""]
+    lines.extend(["", "## 요약 생성 방식"])
+    lines.extend(_build_summary_provider_lines(selected_items))
+
     lines.extend(["", "## 오늘의 핵심 3가지"])
     for takeaway in _build_top_three_takeaways(selected_items):
         lines.append(f"- **{takeaway}**")
@@ -89,6 +108,10 @@ def build_report_markdown(items: List[Dict[str, object]]) -> str:
     lines.extend(["", "## 링크"])
     for item in selected_items:
         lines.append(f"- [{item.get('title')}]({item.get('url')})")
+
+    if debug_lines:
+        lines.extend(["", "## 디버깅 정보"])
+        lines.extend(debug_lines)
 
     lines.extend(["", f"_Generated at {datetime.now().isoformat()}._", ""])
     return "\n".join(lines)
@@ -169,22 +192,42 @@ def _select_primary_topic(item: Dict[str, object]) -> str:
 
 
 def _fallback_summary(item: Dict[str, object]) -> str:
+    source_summary = str(item.get("source_summary", "")).strip()
+    if source_summary:
+        return source_summary
+
     title = str(item.get("title", ""))
     source = str(item.get("source", ""))
     return f"{source}에서 '{title}' 이슈가 주목받았습니다."
 
 
-def _generate_summary(item: Dict[str, object]) -> str:
-    api_summary = _summarize_with_openai(item)
+def _generate_summary(item: Dict[str, object]) -> Tuple[str, str, str, Dict[str, str]]:
+    api_summary, api_detail = _summarize_with_openai(item)
     if api_summary:
-        return api_summary
-    return _fallback_summary(item)
+        return api_summary, "openai", api_detail, {
+            "openai": api_detail,
+            "codex_cli": "Skipped because OpenAI API succeeded",
+        }
+
+    codex_summary, codex_detail = _summarize_with_codex_cli(item)
+    if codex_summary:
+        return codex_summary, "codex_cli", codex_detail, {
+            "openai": api_detail,
+            "codex_cli": codex_detail,
+        }
+
+    fallback_source = "using source summary context" if str(item.get("source_summary", "")).strip() else "using local deterministic summary"
+    fallback_detail = f"Fallback {fallback_source} after {api_detail}; {codex_detail}"
+    return _fallback_summary(item), "fallback", fallback_detail, {
+        "openai": api_detail,
+        "codex_cli": codex_detail,
+    }
 
 
-def _summarize_with_openai(item: Dict[str, object]) -> str:
+def _summarize_with_openai(item: Dict[str, object]) -> Tuple[str, str]:
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if not api_key:
-        return ""
+        return "", "OPENAI_API_KEY missing"
 
     prompt = _load_summary_prompt()
     model = os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL).strip() or DEFAULT_OPENAI_MODEL
@@ -208,10 +251,151 @@ def _summarize_with_openai(item: Dict[str, object]) -> str:
     try:
         with urlopen(request, timeout=30) as response:
             response_payload = json.loads(response.read().decode("utf-8"))
-    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, OSError):
-        return ""
+    except HTTPError as exc:
+        return "", _format_openai_http_error(exc)
+    except (URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
+        return "", f"OpenAI request failed: {type(exc).__name__}: {_compact_text(str(exc), 140)}"
 
-    return _extract_output_text(response_payload).strip()
+    output_text = _extract_output_text(response_payload).strip()
+    if not output_text:
+        return "", f"OpenAI response empty with model {model}"
+    return output_text, f"OpenAI model {model}"
+
+
+def _summarize_with_codex_cli(item: Dict[str, object]) -> Tuple[str, str]:
+    prompt = _build_codex_prompt(item)
+    codex_model = os.getenv("CODEX_MODEL", "").strip()
+    codex_command, resolution_detail = _resolve_codex_command()
+    if not codex_command:
+        return "", resolution_detail
+
+    command = [
+        codex_command,
+        "exec",
+        "--skip-git-repo-check",
+        "--sandbox",
+        "read-only",
+        "--color",
+        "never",
+        "--ephemeral",
+    ]
+    if codex_model:
+        command.extend(["--model", codex_model])
+
+    output_path = None
+    try:
+        output_dir = Path(tempfile.gettempdir())
+        output_path = output_dir / next(tempfile._get_candidate_names())
+        output_path = output_path.with_name(f"{output_path.name}-codex-summary.txt")
+
+        command.extend(["--output-last-message", str(output_path), prompt])
+        completed = subprocess.run(
+            command,
+            cwd=str(ROOT_DIR),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            timeout=90,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        _cleanup_temp_file(output_path)
+        return "", f"Codex CLI unavailable: {type(exc).__name__}: {resolution_detail}"
+
+    stdout_text = completed.stdout.strip()
+    stderr_text = completed.stderr.strip()
+    codex_output = ""
+    if output_path is not None and output_path.exists():
+        try:
+            codex_output = output_path.read_text(encoding="utf-8").strip()
+        except OSError:
+            codex_output = ""
+    _cleanup_temp_file(output_path)
+
+    if completed.returncode != 0:
+        detail = _extract_codex_failure_detail(completed.returncode, stdout_text, stderr_text)
+        return "", f"{detail} | {resolution_detail}"
+    if not codex_output:
+        return "", f"Codex CLI returned empty output | {resolution_detail}"
+
+    detail = f"Codex CLI via {codex_command}"
+    if codex_model:
+        detail = f"Codex CLI model {codex_model} via {codex_command}"
+    return codex_output, detail
+
+
+def _cleanup_temp_file(path: Path | None) -> None:
+    if path is None:
+        return
+    try:
+        path.unlink(missing_ok=True)
+    except OSError:
+        return
+
+
+def _resolve_codex_command() -> Tuple[str, str]:
+    configured_path = os.getenv("CODEX_CLI_PATH", "").strip()
+    candidates: List[str] = []
+    if configured_path:
+        candidates.append(configured_path)
+
+    candidates.extend(["codex.cmd", "codex.exe", "codex"])
+    resolution_attempts: List[str] = []
+    for candidate in candidates:
+        resolved = shutil.which(candidate) if not Path(candidate).is_absolute() else candidate
+        resolution_attempts.append(f"{candidate}->{resolved or 'not-found'}")
+        if resolved:
+            return resolved, f"resolved={resolved}"
+
+    tried = ", ".join(resolution_attempts)
+    return "", f"Codex CLI unavailable: FileNotFoundError while resolving executable. tried={tried}"
+
+
+def _format_openai_http_error(exc: HTTPError) -> str:
+    try:
+        body = exc.read().decode("utf-8", errors="replace")
+    except OSError:
+        body = ""
+    compact_body = _compact_text(body, 180)
+    if compact_body:
+        return f"OpenAI request failed: HTTP {exc.code}: {compact_body}"
+    return f"OpenAI request failed: HTTP {exc.code}"
+
+
+def _extract_codex_failure_detail(returncode: int, stdout_text: str, stderr_text: str) -> str:
+    combined_lines = []
+    for source_text in [stderr_text, stdout_text]:
+        for raw_line in source_text.splitlines():
+            line = " ".join(raw_line.split())
+            if line:
+                combined_lines.append(line)
+
+    priority_patterns = [
+        "Error:",
+        "thread/start failed",
+        "Failed to create session",
+        "permission denied",
+        "액세스가 거부되었습니다",
+        "Failed to create shell snapshot",
+        "error sending request",
+    ]
+    for pattern in priority_patterns:
+        for line in combined_lines:
+            if pattern.lower() in line.lower():
+                return f"Codex CLI failed: {_compact_text(line, 220)}"
+
+    for line in combined_lines:
+        if "WARN" not in line:
+            return f"Codex CLI failed: {_compact_text(line, 220)}"
+
+    return f"Codex CLI failed with exit code {returncode}"
+
+
+def _compact_text(text: str, limit: int) -> str:
+    cleaned = " ".join(str(text).split())
+    if len(cleaned) <= limit:
+        return cleaned
+    return cleaned[: limit - 3] + "..."
 
 
 def _load_summary_prompt() -> str:
@@ -234,6 +418,7 @@ def _load_compare_prompt() -> str:
 
 def _build_summary_input(item: Dict[str, object]) -> str:
     topic_tags = ", ".join(str(tag) for tag in item.get("topic_tags", []))
+    source_summary = str(item.get("source_summary", "")).strip()
     fields = [
         f"title: {str(item.get('title', '')).strip()}",
         f"source: {str(item.get('source', '')).strip()}",
@@ -241,7 +426,17 @@ def _build_summary_input(item: Dict[str, object]) -> str:
         f"created_at: {str(item.get('created_at', '')).strip()}",
         f"topic_tags: {topic_tags}",
     ]
+    if source_summary:
+        fields.append(f"source_summary: {source_summary}")
     return "\n".join(fields)
+
+
+def _build_codex_prompt(item: Dict[str, object]) -> str:
+    return (
+        "Summarize the following trend item in Korean in 1 to 2 sentences. "
+        "Focus on what happened and why it matters. Avoid markdown bullets.\n\n"
+        f"{_build_summary_input(item)}"
+    )
 
 
 def _extract_output_text(response_payload: Dict[str, object]) -> str:
@@ -264,6 +459,91 @@ def _extract_output_text(response_payload: Dict[str, object]) -> str:
 
 def _normalize_key(value: str) -> str:
     return " ".join(value.lower().split())
+
+
+def _build_summary_provider_lines(items: List[Dict[str, object]]) -> List[str]:
+    if not items:
+        return ["- 상위 리포트 항목이 없어 요약 생성 방식 집계를 표시할 수 없습니다."]
+
+    provider_counts: Dict[str, int] = defaultdict(int)
+    lines: List[str] = []
+    for item in items:
+        provider = str(item.get("summary_provider", "fallback"))
+        provider_counts[provider] += 1
+
+    for provider_name in ["openai", "codex_cli", "fallback"]:
+        count = provider_counts.get(provider_name, 0)
+        lines.append(f"- {SUMMARY_PROVIDER_LABELS[provider_name]}: {count}개")
+
+    return lines
+
+
+def _build_debug_lines(items: List[Dict[str, object]]) -> List[str]:
+    if not items:
+        return []
+
+    lines: List[str] = []
+    openai_failures = _filter_debug_items(items, "openai_attempt_detail", _is_failure_detail)
+    codex_failures = _filter_debug_items(
+        items,
+        "codex_cli_attempt_detail",
+        _is_failure_detail,
+    )
+
+    if not openai_failures and not codex_failures:
+        return []
+
+    if openai_failures:
+        lines.append("- OpenAI API 실패 정보:")
+        for detail, count in _count_debug_details(openai_failures, "openai_attempt_detail"):
+            lines.append(f"- {detail}: {count}개")
+
+    if codex_failures:
+        lines.append("- Codex CLI 실패 정보:")
+        for detail, count in _count_debug_details(codex_failures, "codex_cli_attempt_detail"):
+            lines.append(f"- {detail}: {count}개")
+
+    lines.append("- 선택 항목별 실패 정보:")
+    for item in items:
+        title = str(item.get("title", "")).strip()
+        openai_detail = str(item.get("openai_attempt_detail", "")).strip()
+        codex_detail = str(item.get("codex_cli_attempt_detail", "")).strip()
+        fragments: List[str] = []
+        if _is_failure_detail(openai_detail):
+            fragments.append(f"OpenAI={openai_detail}")
+        if _is_failure_detail(codex_detail):
+            fragments.append(f"Codex={codex_detail}")
+        if fragments:
+            lines.append(f"- {title}: {' | '.join(fragments)}")
+
+    return lines
+
+
+def _count_debug_details(items: List[Dict[str, object]], field_name: str) -> List[Tuple[str, int]]:
+    counts: Dict[str, int] = defaultdict(int)
+    for item in items:
+        detail = str(item.get(field_name, "")).strip() or "No data"
+        counts[detail] += 1
+    return sorted(counts.items(), key=lambda entry: (-entry[1], entry[0]))
+
+
+def _filter_debug_items(
+    items: List[Dict[str, object]],
+    field_name: str,
+    predicate,
+) -> List[Dict[str, object]]:
+    selected: List[Dict[str, object]] = []
+    for item in items:
+        detail = str(item.get(field_name, "")).strip()
+        if detail and predicate(detail):
+            selected.append(item)
+    return selected
+
+
+def _is_failure_detail(detail: str) -> bool:
+    normalized = detail.lower()
+    failure_keywords = ["failed", "missing", "unavailable", "error", "denied", "timeout", "not found", "http "]
+    return any(keyword in normalized for keyword in failure_keywords)
 
 
 def _korean_key_insight(item: Dict[str, object]) -> str:
