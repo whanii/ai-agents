@@ -2,10 +2,10 @@
 
 Classify each collected item into one or more of these topics:
 
-- AI Agent & Automation
-- MCP / tool use / skills
-- AI Security
-- threat modeling
+- AI Model
+- AI Agent
+- Security
+- Threat Modeling
 
 Rules:
 

@@ -19,9 +19,51 @@
     "feeds": [
       "https://techcrunch.com/category/artificial-intelligence/feed/",
       "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-      "https://venturebeat.com/ai/feed/",
       "https://www.schneier.com/feed/atom/"
     ],
     "limit_per_feed": 8
+  },
+  "discovery": {
+    "enabled": true,
+    "queries": [
+      "AI agent",
+      "coding agent",
+      "MCP tool use",
+      "LLM inference",
+      "AI security"
+    ],
+    "hacker_news_api_url": "https://hn.algolia.com/api/v1/search_by_date",
+    "github_search_api_url": "https://api.github.com/search/repositories",
+    "limit_per_query": 6,
+    "max_items_per_query": 4,
+    "min_hn_points": 3,
+    "min_github_stars": 20,
+    "exclude_title_patterns": [
+      "awesome-",
+      "tutorial",
+      "course",
+      "homework",
+      "free-",
+      "clone",
+      "demo"
+    ]
+  },
+  "watchlist": {
+    "enabled": true,
+    "feeds": [
+      {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/news/rss.xml"
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://blog.google/technology/ai/rss/"
+      },
+      {
+        "name": "Hugging Face Blog",
+        "url": "https://huggingface.co/blog/feed.xml"
+      }
+    ],
+    "limit_per_feed": 4
   }
 }

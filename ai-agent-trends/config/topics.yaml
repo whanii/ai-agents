@@ -1,19 +1,20 @@
 {
+  "min_keyword_matches": 1,
   "topics": [
     {
-      "name": "AI Agent & Automation",
-      "keywords": ["agent", "agents", "autonomous", "multi-agent", "workflow agent", "ai assistant", "automation", "automate", "ops", "workflow", "case study", "use case", "deployment"]
+      "name": "AI Model",
+      "keywords": ["model", "models", "llm", "foundation model", "local llm", "qwen", "deepseek", "mimo", "glm", "vllm", "context window", "tps", "rtx", "gpu", "weights", "artificial analysis", "benchmark", "inference", "serving", "token", "tokens"]
     },
     {
-      "name": "MCP / tool use / skills",
-      "keywords": ["mcp", "model context protocol", "tool use", "function calling", "skills", "plugin", "tooling"]
+      "name": "AI Agent",
+      "keywords": ["agent", "agents", "autonomous", "multi-agent", "workflow agent", "ai assistant", "automation", "automate", "ops", "workflow", "case study", "use case", "deployment", "coding agent", "code agent", "dev team of ai agents", "mcp", "model context protocol", "tool use", "function calling", "skills", "plugin", "tooling", "claude code", "code templates", "cli tool", "orchestration", "monitoring"]
     },
     {
-      "name": "AI Security",
-      "keywords": ["security architecture", "architecture review", "secure design", "security review", "zero trust"]
+      "name": "Security",
+      "keywords": ["security architecture", "architecture review", "secure design", "security review", "zero trust", "cybersecurity", "vulnerability", "unauthenticated", "dos", "exploit", "router", "cybercrime", "sms blasters", "police", "antivirus", "hackingtool", "soc analyst"]
     },
     {
-      "name": "threat modeling",
+      "name": "Threat Modeling",
       "keywords": ["threat modeling", "threat model", "attack path", "abuse case", "red team", "risk analysis"]
     }
   ]

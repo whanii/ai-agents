@@ -7,16 +7,20 @@ from xml.etree import ElementTree
 def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
     config = config or {}
     feeds = config.get("feeds", [])
-    limit_per_feed = int(config.get("limit_per_feed", 8))
+    limit_per_feed = int(config.get("limit_per_feed", 4))
     items: List[Dict[str, Any]] = []
 
     try:
         import requests
     except Exception as exc:
-        print(f"[fetch][rss_news] failed: {type(exc).__name__}: {exc}")
+        print(f"[fetch][watchlist] failed: {type(exc).__name__}: {exc}")
         return []
 
-    for feed_url in feeds:
+    for feed in feeds:
+        feed_name = str(feed.get("name", "Watchlist")) if isinstance(feed, dict) else "Watchlist"
+        feed_url = str(feed.get("url", "")) if isinstance(feed, dict) else str(feed)
+        if not feed_url:
+            continue
         try:
             response = requests.get(
                 feed_url,
@@ -24,14 +28,14 @@ def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]
                 timeout=20,
             )
             response.raise_for_status()
-
             root = ElementTree.fromstring(response.content)
             for entry in _extract_entries(root)[:limit_per_feed]:
                 items.append(
                     {
                         "title": entry.get("title", ""),
                         "url": entry.get("url", ""),
-                        "source": "RSS News",
+                        "source": f"Watchlist: {feed_name}",
+                        "source_reliability_score": 12,
                         "summary": entry.get("summary", ""),
                         "score": 0,
                         "created_at": entry.get("created_at", ""),
@@ -39,7 +43,7 @@ def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]
                     }
                 )
         except Exception as exc:
-            print(f"[fetch][rss_news] feed failed: {feed_url} | {type(exc).__name__}: {exc}")
+            print(f"[fetch][watchlist] feed failed: {feed_name} | {type(exc).__name__}: {exc}")
 
     return [item for item in items if item.get("title") and item.get("url")]
 

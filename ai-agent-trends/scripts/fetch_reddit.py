@@ -2,27 +2,6 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-MOCK_ITEMS: List[Dict[str, Any]] = [
-    {
-        "title": "Practitioners share MCP-style tool use patterns for local agents",
-        "url": "https://example.com/reddit-mcp-tool-patterns",
-        "source": "Reddit",
-        "summary": "A community thread compares tool registries, permission models, and prompt contracts for agent systems.",
-        "score": 0,
-        "created_at": "2026-04-15T02:20:00+09:00",
-        "topic_tags": ["MCP / tool use / skills", "AI Agent & Automation"],
-    },
-    {
-        "title": "Automation case: triaging security alerts with LLM workflows",
-        "url": "https://example.com/reddit-security-alert-automation",
-        "source": "Reddit",
-        "summary": "Operators discuss where AI automation helps alert triage and where human review is still mandatory.",
-        "score": 0,
-        "created_at": "2026-04-14T23:50:00+09:00",
-        "topic_tags": ["AI Agent & Automation", "AI Security"],
-    },
-]
-
 
 def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
     config = config or {}
@@ -59,10 +38,10 @@ def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]
                     }
                 )
 
-        filtered = [item for item in items if item.get("title") and item.get("url")]
-        return filtered or MOCK_ITEMS[:]
-    except Exception:
-        return MOCK_ITEMS[:]
+        return [item for item in items if item.get("title") and item.get("url")]
+    except Exception as exc:
+        print(f"[fetch][reddit] failed: {type(exc).__name__}: {exc}")
+        return []
 
 
 if __name__ == "__main__":

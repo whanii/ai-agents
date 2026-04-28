@@ -2,27 +2,6 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-MOCK_ITEMS: List[Dict[str, Any]] = [
-    {
-        "title": "Teams are using AI agents for internal security review checklists",
-        "url": "https://example.com/hn-security-review-agents",
-        "source": "Hacker News",
-        "summary": "Discussion highlights practical guardrails for agent-assisted architecture reviews in production.",
-        "score": 0,
-        "created_at": "2026-04-15T06:40:00+09:00",
-        "topic_tags": ["AI Agent & Automation", "AI Security"],
-    },
-    {
-        "title": "What breaks first in tool-using coding agents?",
-        "url": "https://example.com/hn-tool-using-agents",
-        "source": "Hacker News",
-        "summary": "Practitioners compare failure modes around tool permissions, memory, and evaluation loops.",
-        "score": 0,
-        "created_at": "2026-04-15T05:55:00+09:00",
-        "topic_tags": ["AI Agent & Automation", "MCP / tool use / skills"],
-    },
-]
-
 
 def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
     config = config or {}
@@ -61,9 +40,10 @@ def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]
                 }
             )
 
-        return items or MOCK_ITEMS[:]
-    except Exception:
-        return MOCK_ITEMS[:]
+        return items
+    except Exception as exc:
+        print(f"[fetch][hacker_news] failed: {type(exc).__name__}: {exc}")
+        return []
 
 
 if __name__ == "__main__":

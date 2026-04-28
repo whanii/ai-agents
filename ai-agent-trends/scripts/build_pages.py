@@ -66,6 +66,72 @@ def _build_index_page(report_paths: Iterable[Path]) -> str:
         latest_html.append(_report_meta_html(latest_report))
     latest_html.append("</section>")
 
+    methodology_html = [
+        "<section class='panel'>",
+        "<p class='eyebrow'>How It Works</p>",
+        "<h2>트렌드 수집 방식</h2>",
+        "<p>이 페이지는 AI 모델, AI 에이전트, 보안, 위협 모델링 흐름을 매일 수집해 실무 관점의 리포트로 정리합니다. 안정적인 기본 소스와 새 후보를 찾는 발견형 수집을 함께 사용합니다.</p>",
+        "<div class='info-grid'>",
+        "<article class='info-card'>",
+        "<h3>Core Sources</h3>",
+        "<p>GitHub Trending, Hacker News, Reddit, 주요 RSS처럼 매일 안정적으로 확인할 수 있는 기본 수집원입니다.</p>",
+        "</article>",
+        "<article class='info-card'>",
+        "<h3>Discovery</h3>",
+        "<p>AI agent, MCP, LLM inference, AI security 같은 키워드로 HN과 GitHub Search에서 새 후보를 찾습니다. 최소 점수, 스타 수, 제외 패턴으로 스팸성 항목을 줄입니다.</p>",
+        "</article>",
+        "<article class='info-card'>",
+        "<h3>Watchlist</h3>",
+        "<p>OpenAI, Google AI, Hugging Face처럼 중요한 조직과 프로젝트의 발표를 별도로 추적합니다.</p>",
+        "</article>",
+        "<article class='info-card'>",
+        "<h3>Report View</h3>",
+        "<p>수집 항목은 AI Model, AI Agent, Security, Threat Modeling 네 토픽으로 분류됩니다. 상위 항목은 LLM으로 요약하고, 관련 항목과 제외 후보도 함께 보여줍니다.</p>",
+        "</article>",
+        "</div>",
+        "</section>",
+    ]
+
+    criteria_html = [
+        "<section class='panel'>",
+        "<p class='eyebrow'>Selection Rules</p>",
+        "<h2>리포트 포함 기준</h2>",
+        "<p>수집된 항목은 점수화한 뒤 기준점 이상 후보만 리포트 본문에 올립니다. 기본 하한과 당일 상위 퍼센타일을 함께 사용하고, 단순 점수순만 쓰면 한 토픽에 쏠릴 수 있어 토픽별 대표 항목을 먼저 확보합니다.</p>",
+        "<div class='info-grid'>",
+        "<article class='info-card'>",
+        "<h3>기본 기준</h3>",
+        "<p>총점 50점을 기본 하한으로 두되, 후보가 충분히 많으면 당일 점수 분포의 상위 75퍼센타일 컷과 비교해 더 높은 기준을 사용합니다. 하루 리포트에는 최대 6개만 포함합니다.</p>",
+        "</article>",
+        "<article class='info-card'>",
+        "<h3>점수 구성</h3>",
+        "<p>출처 가중치, 최신성, 인기도, 토픽 매칭, 실용성, 신규성, 교차출처 신호, Discovery/Watchlist 신뢰도를 합산하고 Discovery 불확실성은 감점합니다.</p>",
+        "</article>",
+        "<article class='info-card'>",
+        "<h3>토픽 다양성</h3>",
+        "<p>AI Model, AI Agent, Security, Threat Modeling 후보가 있으면 각 토픽의 대표 항목을 우선 검토하고, 한 토픽이 최대 2개를 넘지 않도록 먼저 제한합니다.</p>",
+        "</article>",
+        "<article class='info-card'>",
+        "<h3>관련 항목</h3>",
+        "<p>핵심 6개에 들지 못해도 같은 토픽에서 점수가 높은 항목은 관련 항목이나 주목할 만한 제외 항목으로 남깁니다.</p>",
+        "</article>",
+        "</div>",
+        "<details class='score-details'>",
+        "<summary>점수화 방식 자세히 보기</summary>",
+        "<ul>",
+        "<li><strong>출처 가중치</strong>: GitHub Trending 24점, Hacker News 22점, Watchlist 21점, RSS 20점, Reddit 18점, Discovery 16점.</li>",
+        "<li><strong>최신성</strong>: 6시간 이내 20점, 24시간 이내 14점, 72시간 이내 8점, 그 외 3점.</li>",
+        "<li><strong>인기도</strong>: 원본 점수 또는 스타 수를 최대 100까지만 반영하고 5로 나눈 값, 최대 20점.</li>",
+        "<li><strong>토픽 매칭</strong>: 매칭된 토픽 1개당 6점.</li>",
+        "<li><strong>실용성</strong>: automation, workflow, tool, security, inference 같은 실행 지향 키워드로 최대 24점.</li>",
+        "<li><strong>신규성</strong>: new, emerging, release, benchmark, weights 같은 변화 신호 키워드로 최대 16점.</li>",
+        "<li><strong>교차출처</strong>: 유사 항목이 2개 출처에서 보이면 12점, 3개 이상이면 18점.</li>",
+        "<li><strong>Discovery/Watchlist 신뢰도</strong>: Discovery는 HN 포인트나 GitHub 스타 수에 따라 4~12점, Watchlist는 12점을 부여합니다.</li>",
+        "<li><strong>Discovery 감점</strong>: 검색 발견 후보는 기본 6점 감점하고, 신뢰도와 설명 품질이 충분하면 감점을 줄입니다.</li>",
+        "</ul>",
+        "</details>",
+        "</section>",
+    ]
+
     archive_html: List[str] = ["<section class='panel'>", "<h2>Archive</h2>"]
     if not report_paths:
         archive_html.append("<p>No archived reports yet.</p>")
@@ -78,7 +144,7 @@ def _build_index_page(report_paths: Iterable[Path]) -> str:
         archive_html.append("</ul>")
     archive_html.append("</section>")
 
-    content_html = "\n".join(hero_html + latest_html + archive_html)
+    content_html = "\n".join(hero_html + latest_html + methodology_html + criteria_html + archive_html)
     return _wrap_page(
         title="AI Trend Reports",
         content_html=content_html,
@@ -198,6 +264,26 @@ def _wrap_page(title: str, content_html: str, description: str, home_href: str) 
       padding-bottom: 8px;
       display: inline-block;
     }}
+    .info-grid {{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }}
+    .info-card {{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.42);
+    }}
+    .info-card h3 {{
+      margin: 0 0 8px;
+      color: var(--accent);
+    }}
+    .info-card p {{
+      margin: 0;
+      color: var(--muted);
+    }}
     .report a {{
       color: var(--accent);
     }}
@@ -220,10 +306,25 @@ def _wrap_page(title: str, content_html: str, description: str, home_href: str) 
       border-left: 4px solid var(--accent-soft);
       color: var(--muted);
     }}
+    details {{
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.42);
+    }}
+    .score-details {{
+      margin-top: 16px;
+    }}
+    summary {{
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 700;
+    }}
     @media (max-width: 720px) {{
       .shell {{ width: min(100vw - 20px, 920px); padding-top: 18px; }}
       .topbar {{ flex-direction: column; align-items: flex-start; }}
       .hero, .panel, .report {{ border-radius: 18px; }}
+      .info-grid {{ grid-template-columns: 1fr; }}
     }}
   </style>
 </head>
@@ -280,6 +381,13 @@ def _simple_markdown_to_html(markdown_text: str) -> str:
             if in_list:
                 html_lines.append("</ul>")
                 in_list = False
+            continue
+
+        if line in {"<details>", "</details>"} or line.startswith("<summary>"):
+            if in_list:
+                html_lines.append("</ul>")
+                in_list = False
+            html_lines.append(line)
             continue
 
         if line.startswith("# "):

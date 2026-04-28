@@ -3,27 +3,6 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-MOCK_ITEMS: List[Dict[str, Any]] = [
-    {
-        "title": "Open-source agent orchestration starter gains traction",
-        "url": "https://example.com/github-agent-orchestration",
-        "source": "GitHub Trending",
-        "summary": "A starter kit for multi-step agent workflows adds evaluation hooks and tool execution examples.",
-        "score": 0,
-        "created_at": "2026-04-15T07:00:00+09:00",
-        "topic_tags": ["AI Agent & Automation", "MCP / tool use / skills"],
-    },
-    {
-        "title": "Threat modeling templates for AI automations",
-        "url": "https://example.com/github-threat-modeling-templates",
-        "source": "GitHub Trending",
-        "summary": "A repository packages reusable STRIDE-style templates for LLM apps and automation pipelines.",
-        "score": 0,
-        "created_at": "2026-04-15T07:10:00+09:00",
-        "topic_tags": ["threat modeling", "AI Security", "AI Agent & Automation"],
-    },
-]
-
 
 def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
     config = config or {}
@@ -64,9 +43,10 @@ def fetch_items(config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]
                 }
             )
 
-        return items or MOCK_ITEMS[:]
-    except Exception:
-        return MOCK_ITEMS[:]
+        return items
+    except Exception as exc:
+        print(f"[fetch][github_trending] failed: {type(exc).__name__}: {exc}")
+        return []
 
 
 if __name__ == "__main__":

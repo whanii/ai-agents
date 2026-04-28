@@ -31,6 +31,7 @@ def normalize_items(items: Iterable[Dict[str, Any]], topics_config: Dict[str, An
             "source": clean_text(item.get("source", "")),
             "summary": clean_text(item.get("summary", "")),
             "score": safe_int(item.get("score", 0)),
+            "source_reliability_score": safe_int(item.get("source_reliability_score", 0)),
             "created_at": normalize_datetime(item.get("created_at")),
             "topic_tags": classify_item(item, topics_config),
         }
@@ -50,13 +51,14 @@ def classify_item(item: Dict[str, Any], topics_config: Dict[str, Any]) -> List[s
         ]
     ).lower()
     matches: List[str] = []
+    min_keyword_matches = int(topics_config.get("min_keyword_matches", classify_rules["min_keyword_matches"]))
     for topic in topics_config.get("topics", []):
         name = topic.get("name", "")
         keywords = topic.get("keywords", [])
         if not name or name not in allowed_topics:
             continue
         match_count = sum(1 for keyword in keywords if keyword.lower() in haystack)
-        if match_count >= classify_rules["min_keyword_matches"]:
+        if match_count >= min_keyword_matches:
             matches.append(name)
     return matches
 
