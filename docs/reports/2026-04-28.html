@@ -172,61 +172,74 @@
 <h2>요약 생성 방식</h2>
 <ul>
 <li>OpenAI API: 0개</li>
-<li>Codex CLI: 0개</li>
-<li>LLM Unavailable: 6개</li>
-<li>리포트 분석 생성: LLM Unavailable</li>
+<li>Codex CLI: 6개</li>
+<li>LLM Unavailable: 0개</li>
 </ul>
 <h2>오늘의 핵심 3가지</h2>
 <ul>
-<li>LLM이 핵심 요약을 생성하지 못했습니다.</li>
+<li><strong>Go 기반 에이전트 프레임워크와 원격 오케스트레이션 도구가 함께 부상하면서 AI 에이전트 운영층이 빠르게 다양해지고 있다.</strong></li>
+<li><strong>로컬 추론 영역에서는 오프라인 챗 UI와 단일 GPU 처리량 개선 사례가 나오며 저비용 온디바이스 활용 가능성이 넓어지고 있다.</strong></li>
+<li><strong>보안 교육의 불법 소프트웨어 사용 사례와 로컬 LLM 커뮤니티의 과열 논란은 도구 도입과 정보 해석에서 검증 체계가 선행돼야 함을 드러낸다.</strong></li>
 </ul>
 <h2>핵심 요약</h2>
 <ul>
-<li>LLM이 핵심 요약 섹션을 생성하지 못했습니다.</li>
+<li><code>trpc-agent-go</code>는 Python 외 스택으로 에이전트 시스템을 구현하려는 팀에 새로운 선택지를 제공해 백엔드 표준화 논의를 자극할 수 있다.</li>
+<li><code>paseo</code>는 모바일·데스크톱·CLI를 아우르는 제어 방식을 내세워 에이전트 운영이 단일 개발 환경 밖으로 확장되는 흐름을 보여준다.</li>
+<li>RWKV_APP와 Luce DFlash 사례를 보면 로컬 AI 도입의 초점이 모델 자체뿐 아니라 실행 UI와 추론 효율 개선으로 옮겨가고 있다.</li>
 </ul>
 <h2>실무 적용 포인트</h2>
 <ul>
-<li>LLM이 실무 적용 포인트를 생성하지 못했습니다.</li>
+<li>에이전트 도입을 검토하는 팀은 Python과 함께 Go 기반 프레임워크의 성능, 배포 방식, 기존 백엔드와의 결합 비용을 비교 평가할 필요가 있다.</li>
+<li>로컬 추론 실험에서는 오프라인 UI 구성과 단일 GPU 최적화 기법을 분리 검증해 실제 운영비 절감 효과를 확인하는 편이 안전하다.</li>
+<li>보안 실습과 개발 도구 조달 과정에서는 라이선스 준수 여부를 점검하는 내부 기준을 명문화하는 것이 바람직하다.</li>
 </ul>
 <h2>트렌드 분류</h2>
 <h3>AI Model</h3>
 <ul>
-<li>🔥 핵심 <a href="https://github.com/gpustack/gpustack">gpustack/gpustack</a> - LLM 요약을 생성하지 못했습니다. 출처: Discovery: GitHub Search.</li>
-<li>📎 참고 <a href="https://i.redd.it/ppdt7ixx9rxg1.png">Luce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090</a> - LLM 요약을 생성하지 못했습니다. 출처: Reddit.</li>
+<li>📎 참고 <a href="https://github.com/RWKV-APP/RWKV_APP">RWKV-APP/RWKV_APP</a> - RWKV-APP/RWKV_APP는 Flutter 기반으로 만든 빠르고 가벼운 RWKV 챗 UI로, 오프라인 사용과 멀티 백엔드 연동을 지원해 로컬 RWKV 추론 환경에 맞춰 확장할 수 있는 프로젝트다. 현업에서는 경량 클라이언트로 로컬 AI 배포와 테스트를 신속히 진행하고, 네트워크 의존도를 낮춘 온디바이스 워크플로를 설계하는 데 바로 활용할 수 있다. 출처: Discovery: GitHub Search.</li>
+<li>📎 참고 <a href="https://i.redd.it/ppdt7ixx9rxg1.png">Luce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090</a> - Luce Org가 ggml 기반의 독립형 C++/CUDA 스택으로 DFlash 추측 디코딩의 GGUF 포트를 구현해 단일 24GB RTX 3090에서 Qwen3.6-27B를 구동하며 최대 2배 처리량을 낼 수 있는 Luce DFlash를 공개했다. 이는 고가 멀티 GPU 없이도 중대형 모델 서빙 효율을 끌어올릴 수 있다는 뜻이어서, 비용 제약이 큰 팀이 온프레미스 추론 성능을 개선하는 데 직접적인 선택지를 넓혀준다. 출처: Reddit.</li>
 <li>관련 항목:</li>
+<li><a href="https://github.com/trpc-group/trpc-agent-go">trpc-group/trpc-agent-go</a> - Discovery: GitHub Search · 총점 93</li>
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sxqa2c/im_done_with_using_local_llms_for_coding/">I&rsquo;m done with using local LLMs for coding</a> - Reddit · 총점 78</li>
 <li><a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a> - Watchlist: Hugging Face Blog · 총점 75</li>
 <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-genai-intensive-course-vibe-coding-june-2026/">Join the new AI Agents Vibe Coding Course from Google and Kaggle</a> - Watchlist: Google AI Blog · 총점 74</li>
-<li><a href="https://www.reddit.com/r/MachineLearning/comments/1sx3p40/how_do_you_test_ai_agents_in_production_the/">How do you test AI agents in production? The unpredictability is overwhelming.[D]</a> - Reddit · 총점 72</li>
-<li><a href="https://github.com/TauricResearch/TradingAgents">TauricResearch/TradingAgents</a> - GitHub Trending · 총점 71</li>
 </ul>
 <h3>AI Agent</h3>
 <ul>
-<li>⚡ 중요 <a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a> - LLM 요약을 생성하지 못했습니다. 출처: Watchlist: Hugging Face Blog.</li>
-<li>⚡ 중요 <a href="https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-genai-intensive-course-vibe-coding-june-2026/">Join the new AI Agents Vibe Coding Course from Google and Kaggle</a> - LLM 요약을 생성하지 못했습니다. 출처: Watchlist: Google AI Blog.</li>
+<li>🔥 핵심 <a href="https://github.com/trpc-group/trpc-agent-go">trpc-group/trpc-agent-go</a> - GitHub에서 trpc-group의 trpc-agent-go가 AI 에이전트와 LLM 도구 연동을 위한 Go 프레임워크로 공개되며, Go 기반으로 지능형 에이전트 시스템을 구현하려는 개발 수요를 겨냥한 움직임이 포착됐다. 운영 측면에서는 기존 Python 중심 스택 외에 Go 선택지가 강화되면서 백엔드 일관성, 성능, 배포 효율을 중시하는 팀의 에이전트 도입 검토가 빨라질 수 있다. 출처: Discovery: GitHub Search.</li>
+<li>⚡ 중요 <a href="https://github.com/getpaseo/paseo">getpaseo/paseo</a> - getpaseo의 <code>paseo</code>는 휴대폰, 데스크톱, CLI에서 원격으로 코딩 에이전트를 오케스트레이션할 수 있게 해 주는 GitHub 프로젝트로, AI 에이전트 운영을 여러 기기와 작업 환경에 걸쳐 통합하려는 흐름을 반영한다. 운영 측면에서는 개발팀이 장소와 디바이스 제약 없이 에이전트 작업을 제어하고 모니터링할 수 있어 원격 개발, 대응 속도, 멀티채널 워크플로 설계에 직접적인 영향을 줄 수 있다. 출처: Discovery: GitHub Search.</li>
 <li>관련 항목:</li>
-<li><a href="https://github.com/gpustack/gpustack">gpustack/gpustack</a> - Discovery: GitHub Search · 총점 95</li>
-<li><a href="https://www.reddit.com/r/MachineLearning/comments/1sx3p40/how_do_you_test_ai_agents_in_production_the/">How do you test AI agents in production? The unpredictability is overwhelming.[D]</a> - Reddit · 총점 72</li>
-<li><a href="https://github.com/TauricResearch/TradingAgents">TauricResearch/TradingAgents</a> - GitHub Trending · 총점 71</li>
-<li><a href="https://openai.com/index/choco">Choco automates food distribution with AI agents</a> - Watchlist: OpenAI Blog · 총점 69</li>
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sxqa2c/im_done_with_using_local_llms_for_coding/">I&rsquo;m done with using local LLMs for coding</a> - Reddit · 총점 78</li>
+<li><a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a> - Watchlist: Hugging Face Blog · 총점 75</li>
+<li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-genai-intensive-course-vibe-coding-june-2026/">Join the new AI Agents Vibe Coding Course from Google and Kaggle</a> - Watchlist: Google AI Blog · 총점 74</li>
+<li><a href="https://www.reddit.com/r/MachineLearning/comments/1sx3p40/how_do_you_test_ai_agents_in_production_the/">How do you test AI agents in production? The unpredictability is overwhelming.[D]</a> - Reddit · 총점 73</li>
 </ul>
 <h3>Security</h3>
 <ul>
-<li>📎 참고 <a href="https://www.reddit.com/r/cybersecurity/comments/1sxk8q1/companies_are_realizing_that_using_ai_is_not/">Companies are realizing that using AI is not cheap. I am betting there is overpush of AI and now we are stepping back to cut AI cost for cybersecurity.</a> - LLM 요약을 생성하지 못했습니다. 출처: Reddit.</li>
-<li>📎 참고 <a href="https://www.reddit.com/r/cybersecurity/comments/1sx84lt/title_cybersecurity_internship_asking_us_to_use/">Title: Cybersecurity internship asking us to use cracked Burp Suite Pro — is this normal?</a> - LLM 요약을 생성하지 못했습니다. 출처: Reddit.</li>
+<li>📎 참고 <a href="https://www.reddit.com/r/cybersecurity/comments/1sx84lt/title_cybersecurity_internship_asking_us_to_use/">Title: Cybersecurity internship asking us to use cracked Burp Suite Pro — is this normal?</a> - 레딧에서는 한 사이버보안 인턴십이 PortSwigger 교육 자료와 함께 정식 라이선스 대신 GitHub의 패치된 Burp Suite Pro 설치를 안내했다는 사례가 공유되며, 업계 관행인지와 윤리·합법성 문제가 논의됐다. 기업과 교육 운영자는 보안 교육 명목의 불법 소프트웨어 사용이 라이선스 위반뿐 아니라 준법 리스크와 조직 신뢰 훼손으로 이어질 수 있어 도구 조달과 실습 환경 운영 기준을 재점검해야 한다. 출처: Reddit.</li>
 <li>관련 항목:</li>
 <li><a href="https://github.com/Z4nzu/hackingtool">Z4nzu/hackingtool</a> - GitHub Trending · 총점 61</li>
+<li><a href="https://www.magonia.io/research/why-a-decade-of-writing-detection-logic-makes-the-mythos-exploit-numbers-less-scary/">Why a Decade of Writing Detection Logic Makes the Mythos Exploit Numbers Less Scary</a> - Reddit · 총점 49</li>
 </ul>
 <h3>Threat Modeling</h3>
 <ul>
 <li>이번 상위 항목에는 포함되지 않았습니다.</li>
 </ul>
+<h3>Uncategorized</h3>
+<ul>
+<li>📎 참고 <a href="https://i.redd.it/a0r1ptt6avxg1.jpeg">Duality of r/LocalLLaMA</a> - Reddit의 r/LocalLLaMA를 두고 한편으로는 오픈소스·로컬 AI 실험의 핵심 커뮤니티로, 다른 한편으로는 과장된 성능 주장과 과열된 분위기가 공존한다는 이중적 인식을 짚은 게시물이 올라왔다. 이는 로컬 LLM 동향을 모니터링하는 팀이 커뮤니티의 초기 신호를 참고하되, 모델 성능·도입 판단은 별도 검증과 교차 확인을 전제로 운영해야 한다는 점을 시사한다. 출처: Reddit.</li>
+</ul>
 <h2>비교</h2>
 <ul>
-<li>LLM이 비교 섹션을 생성하지 못했습니다.</li>
+<li><code>trpc-agent-go</code>가 서버 측 구현 언어 선택의 폭을 넓히는 사례라면 <code>paseo</code>는 여러 기기에서 에이전트 작업을 통합 제어하는 운영 도구에 가깝다.</li>
+<li>RWKV_APP는 경량 오프라인 사용성에 무게를 두고 있고 Luce DFlash는 단일 RTX 3090에서의 처리량 향상에 초점을 맞춘다.</li>
+<li>GitHub 기반 프로젝트들은 구현과 운영 효율을 겨냥하는 반면 Reddit 기반 항목들은 검증되지 않은 주장과 준법 리스크를 경계하게 만든다.</li>
 </ul>
 <h2>의미 분석</h2>
 <ul>
-<li>LLM이 의미 분석 섹션을 생성하지 못했습니다.</li>
+<li>개발 조직은 에이전트 프레임워크 선정뿐 아니라 원격 제어, 모니터링, 멀티디바이스 운영까지 포함한 전체 워크플로 관점에서 도입 전략을 짜야 한다.</li>
+<li>로컬 AI 관련 신호는 실무 적용 가능성이 있지만 커뮤니티 반응만으로 성능이나 안정성을 판단하기에는 근거가 약할 수 있다.</li>
+<li>보안과 AI 도구 활용이 확대될수록 기술 효율 못지않게 라이선스 준수와 검증 절차가 운영 성숙도의 핵심 지표가 될 가능성이 크다.</li>
 </ul>
 <h2>점수 현황</h2>
 <ul>
@@ -234,35 +247,35 @@
 <li>동적 기준: 기본 하한 50점과 당일 후보 상위 75퍼센타일 점수 55점 중 더 높은 값을 사용합니다.</li>
 <li>선정 방식: 기준점 이상 항목 중 토픽별 대표 후보를 먼저 포함하고, 토픽별 최대 2개까지 총점순으로 채웁니다.</li>
 <li>점수 구성: 출처 가중치, 최신성, 인기도, 토픽 매칭, 실용성, 신규성, 교차출처, Discovery/Watchlist 신뢰도를 합산하고 Discovery 불확실성은 감점합니다.</li>
-<li>[포함] gpustack/gpustack | 총점=95, 실용성=17, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
-<li>[포함] DeepSeek-V4: a million-token context that agents can actually use | 총점=75, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
-<li>[포함] Join the new AI Agents Vibe Coding Course from Google and Kaggle | 총점=74, 실용성=10, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
-<li>[포함] Companies are realizing that using AI is not cheap. I am betting there is overpush of AI and now we are stepping back to cut AI cost for cybersecurity. | 총점=70, 실용성=6, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] trpc-group/trpc-agent-go | 총점=93, 실용성=15, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
+<li>[포함] getpaseo/paseo | 총점=82, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
+<li>[포함] RWKV-APP/RWKV_APP | 총점=71, 실용성=11, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
+<li>[포함] Title: Cybersecurity internship asking us to use cracked Burp Suite Pro — is this normal? | 총점=64, 실용성=6, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
 <li>[포함] Luce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090 | 총점=63, 실용성=0, 신규성=5, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
-<li>[포함] Title: Cybersecurity internship asking us to use cracked Burp Suite Pro — is this normal? | 총점=63, 실용성=6, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
-<li>[제외] How do you test AI agents in production? The unpredictability is overwhelming.[D] | 총점=72, 실용성=22, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] Duality of r/LocalLLaMA | 총점=62, 실용성=4, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] I&rsquo;m done with using local LLMs for coding | 총점=78, 실용성=14, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] DeepSeek-V4: a million-token context that agents can actually use | 총점=75, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
+<li>[제외] Join the new AI Agents Vibe Coding Course from Google and Kaggle | 총점=74, 실용성=10, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
+<li>[제외] How do you test AI agents in production? The unpredictability is overwhelming.[D] | 총점=73, 실용성=22, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
 <li>[제외] TauricResearch/TradingAgents | 총점=71, 실용성=15, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] supabitapp/supaterm | 총점=69, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=6</li>
 <li>[제외] Choco automates food distribution with AI agents | 총점=69, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
 <li>[제외] Dicklesworthstone/frankenterm | 총점=67, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
-<li>[제외] davila7/claude-code-templates | 총점=66, 실용성=16, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
-<li>[제외] Show HN: 49Agents – Infinite canvas IDE for AI agents | 총점=64, 실용성=10, 신규성=5, 교차출처=0, 출처신뢰=8, Discovery감점=4</li>
-<li>[제외] Show HN: AgentSwift – Open-source iOS builder agent | 총점=64, 실용성=10, 신규성=5, 교차출처=0, 출처신뢰=8, Discovery감점=4</li>
-<li>[제외] An open-source spec for orchestration: Symphony | 총점=64, 실용성=5, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
-<li>제외 항목 82개는 점수표에서 생략했습니다. 주요 후보는 아래 &lsquo;주목할 만한 제외 항목&rsquo;을 확인하세요.</li>
+<li>제외 항목 79개는 점수표에서 생략했습니다. 주요 후보는 아래 &lsquo;주목할 만한 제외 항목&rsquo;을 확인하세요.</li>
 </ul>
 <h2>주목할 만한 제외 항목</h2>
 <ul>
-<li><a href="https://www.reddit.com/r/MachineLearning/comments/1sx3p40/how_do_you_test_ai_agents_in_production_the/">How do you test AI agents in production? The unpredictability is overwhelming.[D]</a> - 총점 72점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
-<li><a href="https://github.com/TauricResearch/TradingAgents">TauricResearch/TradingAgents</a> - 총점 71점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sxqa2c/im_done_with_using_local_llms_for_coding/">I&rsquo;m done with using local LLMs for coding</a> - 총점 78점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+<li><a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a> - 총점 75점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
 </ul>
 <h2>링크</h2>
 <ul>
-<li><a href="https://github.com/gpustack/gpustack">gpustack/gpustack</a></li>
-<li><a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a></li>
-<li><a href="https://www.reddit.com/r/cybersecurity/comments/1sxk8q1/companies_are_realizing_that_using_ai_is_not/">Companies are realizing that using AI is not cheap. I am betting there is overpush of AI and now we are stepping back to cut AI cost for cybersecurity.</a></li>
-<li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-genai-intensive-course-vibe-coding-june-2026/">Join the new AI Agents Vibe Coding Course from Google and Kaggle</a></li>
+<li><a href="https://github.com/RWKV-APP/RWKV_APP">RWKV-APP/RWKV_APP</a></li>
+<li><a href="https://github.com/trpc-group/trpc-agent-go">trpc-group/trpc-agent-go</a></li>
 <li><a href="https://www.reddit.com/r/cybersecurity/comments/1sx84lt/title_cybersecurity_internship_asking_us_to_use/">Title: Cybersecurity internship asking us to use cracked Burp Suite Pro — is this normal?</a></li>
+<li><a href="https://github.com/getpaseo/paseo">getpaseo/paseo</a></li>
 <li><a href="https://i.redd.it/ppdt7ixx9rxg1.png">Luce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090</a></li>
+<li><a href="https://i.redd.it/a0r1ptt6avxg1.jpeg">Duality of r/LocalLLaMA</a></li>
 </ul>
 <h2>디버깅 정보</h2>
 <details>
@@ -270,19 +283,17 @@
 
 - OpenAI API 실패 정보:
 - OPENAI_API_KEY missing: 6개
-- 리포트 섹션 생성 실패 정보:
-- OpenAI=OPENAI_API_KEY missing
 - 선택 항목별 실패 정보:
-- gpustack/gpustack: OpenAI=OPENAI_API_KEY missing
-- DeepSeek-V4: a million-token context that agents can actually use: OpenAI=OPENAI_API_KEY missing
-- Companies are realizing that using AI is not cheap. I am betting there is overpush of AI and now we are stepping back to cut AI cost for cybersecurity.: OpenAI=OPENAI_API_KEY missing
-- Join the new AI Agents Vibe Coding Course from Google and Kaggle: OpenAI=OPENAI_API_KEY missing
+- RWKV-APP/RWKV_APP: OpenAI=OPENAI_API_KEY missing
+- trpc-group/trpc-agent-go: OpenAI=OPENAI_API_KEY missing
 - Title: Cybersecurity internship asking us to use cracked Burp Suite Pro — is this normal?: OpenAI=OPENAI_API_KEY missing
+- getpaseo/paseo: OpenAI=OPENAI_API_KEY missing
 - Luce DFlash: Qwen3.6-27B at up to 2x throughput on a single RTX 3090: OpenAI=OPENAI_API_KEY missing
+- Duality of r/LocalLLaMA: OpenAI=OPENAI_API_KEY missing
 
 </details>
 
-<p><em>Generated at 2026-04-28T13:14:36.587756.</em></p></article>
+<p><em>Generated at 2026-04-28T19:16:27.992880.</em></p></article>
   </main>
 </body>
 </html>
