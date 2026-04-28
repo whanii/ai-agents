@@ -116,88 +116,56 @@
     .signal-tile {
       position: relative;
       display: grid;
-      place-items: end start;
+      grid-template-rows: 1fr auto;
+      align-items: end;
       border-radius: 20px;
-      padding: 13px;
-      min-height: 92px;
+      padding: 10px 12px 12px;
+      min-height: 118px;
       overflow: hidden;
-      background: rgba(255,250,240,0.8);
-      border: 1px solid rgba(24,33,43,0.16);
+      background:
+        linear-gradient(180deg, rgba(255,253,247,0.94), rgba(246,235,219,0.78)),
+        radial-gradient(circle at 16% 12%, rgba(255,255,255,0.9), transparent 42%);
+      border: 1px solid rgba(24,33,43,0.2);
       font-weight: 900;
       color: var(--ink);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        0 14px 26px rgba(64,48,31,0.12);
+    }
+    .signal-tile::after {
+      content: "";
+      position: absolute;
+      inset: auto -18px -30px 28%;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(24,33,43,0.08);
+      filter: blur(12px);
+    }
+    .signal-visual {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 84px;
+      filter: drop-shadow(0 9px 12px rgba(64,48,31,0.16));
+    }
+    .signal-model {
+      background: linear-gradient(180deg, #fafdff, #e8f3f9);
+    }
+    .signal-agent {
+      background: linear-gradient(180deg, #fffaf3, #faead8);
+    }
+    .signal-security {
+      background: linear-gradient(180deg, #fbfff3, #edf3d8);
+    }
+    .signal-threat {
+      background: linear-gradient(180deg, #fff8ff, #f1e3f2);
     }
     .signal-tile b {
       position: relative;
-      z-index: 2;
-      font-size: 0.9rem;
-    }
-    .signal-tile i {
-      position: absolute;
-      inset: 14px;
-      display: block;
-      opacity: 0.9;
-    }
-    .signal-model i {
-      border-radius: 50%;
-      border: 3px solid rgba(37,95,133,0.7);
-      background:
-        radial-gradient(circle, rgba(37,95,133,0.62) 0 11%, transparent 12% 100%),
-        conic-gradient(from 45deg, transparent 0 18%, rgba(37,95,133,0.34) 18% 25%, transparent 25% 48%, rgba(37,95,133,0.34) 48% 56%, transparent 56%);
-    }
-    .signal-agent i {
-      background:
-        radial-gradient(circle at 22% 30%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
-        radial-gradient(circle at 76% 30%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
-        radial-gradient(circle at 50% 74%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
-        linear-gradient(35deg, transparent 45%, rgba(155,77,27,0.46) 46% 54%, transparent 55%),
-        linear-gradient(-35deg, transparent 45%, rgba(155,77,27,0.46) 46% 54%, transparent 55%);
-    }
-    .signal-security i {
-      width: 58px;
-      height: 68px;
-      left: auto;
-      right: 18px;
-      top: 10px;
-      border-radius: 28px 28px 18px 18px;
-      border: 3px solid rgba(88,101,42,0.75);
-      background:
-        linear-gradient(180deg, rgba(88,101,42,0.16), rgba(88,101,42,0.34));
-    }
-    .signal-security i::before {
-      content: "";
-      position: absolute;
-      width: 38px;
-      height: 24px;
-      border: 3px solid rgba(88,101,42,0.75);
-      border-bottom: 0;
-      border-radius: 22px 22px 0 0;
-      left: 7px;
-      top: -22px;
-    }
-    .signal-threat i {
-      background:
-        linear-gradient(90deg, transparent 48%, rgba(115,63,117,0.56) 49% 51%, transparent 52%),
-        linear-gradient(0deg, transparent 48%, rgba(115,63,117,0.56) 49% 51%, transparent 52%);
-    }
-    .signal-threat i::before,
-    .signal-threat i::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      border: 3px solid rgba(115,63,117,0.66);
-    }
-    .signal-threat i::before {
-      width: 54px;
-      height: 54px;
-      right: 2px;
-      top: 2px;
-    }
-    .signal-threat i::after {
-      width: 16px;
-      height: 16px;
-      left: 4px;
-      bottom: 4px;
+      z-index: 3;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.72);
     }
     .panel {
       padding: 26px;
@@ -237,9 +205,12 @@
       align-items: center;
       gap: 18px;
       padding: 18px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(24,33,43,0.18);
       border-radius: 20px;
-      background: var(--panel-strong);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(238,246,251,0.72)),
+        var(--panel-strong);
+      box-shadow: 0 18px 34px rgba(64,48,31,0.1);
       font-size: 1.15rem;
     }
     .brief-link strong {
@@ -273,12 +244,49 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
     .info-card {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(24,33,43,0.18);
       border-radius: 18px;
       padding: 16px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(247,239,226,0.74));
-      box-shadow: 0 10px 24px rgba(64,48,31,0.07);
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(247,239,226,0.84));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        0 14px 30px rgba(64,48,31,0.09);
+    }
+    .info-card::before {
+      content: "";
+      display: block;
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      background: var(--accent);
+    }
+    .feature-grid .info-card:nth-child(4n+1) {
+      background: linear-gradient(180deg, #ffffff, #eef6fb);
+    }
+    .feature-grid .info-card:nth-child(4n+1)::before {
+      background: #255f85;
+    }
+    .feature-grid .info-card:nth-child(4n+2) {
+      background: linear-gradient(180deg, #ffffff, #fff2e2);
+    }
+    .feature-grid .info-card:nth-child(4n+2)::before {
+      background: #9b4d1b;
+    }
+    .feature-grid .info-card:nth-child(4n+3) {
+      background: linear-gradient(180deg, #ffffff, #f2f7df);
+    }
+    .feature-grid .info-card:nth-child(4n+3)::before {
+      background: #58652a;
+    }
+    .feature-grid .info-card:nth-child(4n+4) {
+      background: linear-gradient(180deg, #ffffff, #f7edf8);
+    }
+    .feature-grid .info-card:nth-child(4n+4)::before {
+      background: #733f75;
     }
     .info-card h3 {
       margin: 0 0 8px;

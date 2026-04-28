@@ -116,88 +116,56 @@
     .signal-tile {
       position: relative;
       display: grid;
-      place-items: end start;
+      grid-template-rows: 1fr auto;
+      align-items: end;
       border-radius: 20px;
-      padding: 13px;
-      min-height: 92px;
+      padding: 10px 12px 12px;
+      min-height: 118px;
       overflow: hidden;
-      background: rgba(255,250,240,0.8);
-      border: 1px solid rgba(24,33,43,0.16);
+      background:
+        linear-gradient(180deg, rgba(255,253,247,0.94), rgba(246,235,219,0.78)),
+        radial-gradient(circle at 16% 12%, rgba(255,255,255,0.9), transparent 42%);
+      border: 1px solid rgba(24,33,43,0.2);
       font-weight: 900;
       color: var(--ink);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        0 14px 26px rgba(64,48,31,0.12);
+    }
+    .signal-tile::after {
+      content: "";
+      position: absolute;
+      inset: auto -18px -30px 28%;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(24,33,43,0.08);
+      filter: blur(12px);
+    }
+    .signal-visual {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 84px;
+      filter: drop-shadow(0 9px 12px rgba(64,48,31,0.16));
+    }
+    .signal-model {
+      background: linear-gradient(180deg, #fafdff, #e8f3f9);
+    }
+    .signal-agent {
+      background: linear-gradient(180deg, #fffaf3, #faead8);
+    }
+    .signal-security {
+      background: linear-gradient(180deg, #fbfff3, #edf3d8);
+    }
+    .signal-threat {
+      background: linear-gradient(180deg, #fff8ff, #f1e3f2);
     }
     .signal-tile b {
       position: relative;
-      z-index: 2;
-      font-size: 0.9rem;
-    }
-    .signal-tile i {
-      position: absolute;
-      inset: 14px;
-      display: block;
-      opacity: 0.9;
-    }
-    .signal-model i {
-      border-radius: 50%;
-      border: 3px solid rgba(37,95,133,0.7);
-      background:
-        radial-gradient(circle, rgba(37,95,133,0.62) 0 11%, transparent 12% 100%),
-        conic-gradient(from 45deg, transparent 0 18%, rgba(37,95,133,0.34) 18% 25%, transparent 25% 48%, rgba(37,95,133,0.34) 48% 56%, transparent 56%);
-    }
-    .signal-agent i {
-      background:
-        radial-gradient(circle at 22% 30%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
-        radial-gradient(circle at 76% 30%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
-        radial-gradient(circle at 50% 74%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
-        linear-gradient(35deg, transparent 45%, rgba(155,77,27,0.46) 46% 54%, transparent 55%),
-        linear-gradient(-35deg, transparent 45%, rgba(155,77,27,0.46) 46% 54%, transparent 55%);
-    }
-    .signal-security i {
-      width: 58px;
-      height: 68px;
-      left: auto;
-      right: 18px;
-      top: 10px;
-      border-radius: 28px 28px 18px 18px;
-      border: 3px solid rgba(88,101,42,0.75);
-      background:
-        linear-gradient(180deg, rgba(88,101,42,0.16), rgba(88,101,42,0.34));
-    }
-    .signal-security i::before {
-      content: "";
-      position: absolute;
-      width: 38px;
-      height: 24px;
-      border: 3px solid rgba(88,101,42,0.75);
-      border-bottom: 0;
-      border-radius: 22px 22px 0 0;
-      left: 7px;
-      top: -22px;
-    }
-    .signal-threat i {
-      background:
-        linear-gradient(90deg, transparent 48%, rgba(115,63,117,0.56) 49% 51%, transparent 52%),
-        linear-gradient(0deg, transparent 48%, rgba(115,63,117,0.56) 49% 51%, transparent 52%);
-    }
-    .signal-threat i::before,
-    .signal-threat i::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      border: 3px solid rgba(115,63,117,0.66);
-    }
-    .signal-threat i::before {
-      width: 54px;
-      height: 54px;
-      right: 2px;
-      top: 2px;
-    }
-    .signal-threat i::after {
-      width: 16px;
-      height: 16px;
-      left: 4px;
-      bottom: 4px;
+      z-index: 3;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.72);
     }
     .panel {
       padding: 26px;
@@ -237,9 +205,12 @@
       align-items: center;
       gap: 18px;
       padding: 18px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(24,33,43,0.18);
       border-radius: 20px;
-      background: var(--panel-strong);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(238,246,251,0.72)),
+        var(--panel-strong);
+      box-shadow: 0 18px 34px rgba(64,48,31,0.1);
       font-size: 1.15rem;
     }
     .brief-link strong {
@@ -273,12 +244,49 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
     .info-card {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(24,33,43,0.18);
       border-radius: 18px;
       padding: 16px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(247,239,226,0.74));
-      box-shadow: 0 10px 24px rgba(64,48,31,0.07);
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(247,239,226,0.84));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        0 14px 30px rgba(64,48,31,0.09);
+    }
+    .info-card::before {
+      content: "";
+      display: block;
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      background: var(--accent);
+    }
+    .feature-grid .info-card:nth-child(4n+1) {
+      background: linear-gradient(180deg, #ffffff, #eef6fb);
+    }
+    .feature-grid .info-card:nth-child(4n+1)::before {
+      background: #255f85;
+    }
+    .feature-grid .info-card:nth-child(4n+2) {
+      background: linear-gradient(180deg, #ffffff, #fff2e2);
+    }
+    .feature-grid .info-card:nth-child(4n+2)::before {
+      background: #9b4d1b;
+    }
+    .feature-grid .info-card:nth-child(4n+3) {
+      background: linear-gradient(180deg, #ffffff, #f2f7df);
+    }
+    .feature-grid .info-card:nth-child(4n+3)::before {
+      background: #58652a;
+    }
+    .feature-grid .info-card:nth-child(4n+4) {
+      background: linear-gradient(180deg, #ffffff, #f7edf8);
+    }
+    .feature-grid .info-card:nth-child(4n+4)::before {
+      background: #733f75;
     }
     .info-card h3 {
       margin: 0 0 8px;
@@ -570,10 +578,10 @@
 <p class='lede'>매일 수집한 AI Model, AI Agent, Security, Threat Modeling 신호를 실무자가 빠르게 읽을 수 있는 브리핑으로 정리합니다.</p>
 </div>
 <div class='hero-orbit' aria-hidden='true'>
-<span class='signal-tile signal-model'><i></i><b>Model</b></span>
-<span class='signal-tile signal-agent'><i></i><b>Agent</b></span>
-<span class='signal-tile signal-security'><i></i><b>Security</b></span>
-<span class='signal-tile signal-threat'><i></i><b>Threat</b></span>
+<span class='signal-tile signal-model'><svg class="signal-visual" viewBox="0 0 120 120" role="img" aria-label=""> <defs> <linearGradient id="modelGrad" x1="18" y1="16" x2="98" y2="104"> <stop offset="0" stop-color="#7eb4d5"/> <stop offset="1" stop-color="#255f85"/> </linearGradient> </defs> <circle cx="60" cy="58" r="31" fill="rgba(37,95,133,0.1)" stroke="url(#modelGrad)" stroke-width="5"/> <ellipse cx="60" cy="58" rx="45" ry="18" fill="none" stroke="#255f85" stroke-width="3" opacity=".52" transform="rotate(-25 60 58)"/> <ellipse cx="60" cy="58" rx="45" ry="18" fill="none" stroke="#255f85" stroke-width="3" opacity=".38" transform="rotate(25 60 58)"/> <circle cx="60" cy="58" r="9" fill="#b84b22"/> <circle cx="31" cy="34" r="5" fill="#255f85"/> <circle cx="91" cy="77" r="5" fill="#255f85"/> <path d="M31 34 L60 58 L91 77" fill="none" stroke="#18212b" stroke-width="2" opacity=".28"/> </svg><b>Model</b></span>
+<span class='signal-tile signal-agent'><svg class="signal-visual" viewBox="0 0 120 120" role="img" aria-label=""> <defs> <linearGradient id="agentGrad" x1="20" y1="20" x2="100" y2="96"> <stop offset="0" stop-color="#f0a15c"/> <stop offset="1" stop-color="#9b4d1b"/> </linearGradient> </defs> <path d="M35 36 C52 18 80 20 90 43 C104 75 67 99 41 78 C25 65 23 48 35 36Z" fill="rgba(155,77,27,0.12)" stroke="url(#agentGrad)" stroke-width="5"/> <path d="M39 42 L61 59 L84 42 M61 59 L61 84" fill="none" stroke="#9b4d1b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/> <circle cx="39" cy="42" r="10" fill="#fffaf0" stroke="#9b4d1b" stroke-width="4"/> <circle cx="84" cy="42" r="10" fill="#fffaf0" stroke="#9b4d1b" stroke-width="4"/> <circle cx="61" cy="84" r="10" fill="#fffaf0" stroke="#9b4d1b" stroke-width="4"/> <circle cx="61" cy="59" r="8" fill="#b84b22"/> </svg><b>Agent</b></span>
+<span class='signal-tile signal-security'><svg class="signal-visual" viewBox="0 0 120 120" role="img" aria-label=""> <defs> <linearGradient id="securityGrad" x1="34" y1="18" x2="86" y2="104"> <stop offset="0" stop-color="#9aad4f"/> <stop offset="1" stop-color="#58652a"/> </linearGradient> </defs> <path d="M60 18 L91 30 V55 C91 78 78 95 60 104 C42 95 29 78 29 55 V30Z" fill="rgba(88,101,42,0.14)" stroke="url(#securityGrad)" stroke-width="5" stroke-linejoin="round"/> <path d="M45 58 V50 C45 41 51 35 60 35 C69 35 75 41 75 50 V58" fill="none" stroke="#58652a" stroke-width="5" stroke-linecap="round"/> <rect x="41" y="56" width="38" height="30" rx="8" fill="#fffaf0" stroke="#58652a" stroke-width="5"/> <circle cx="60" cy="70" r="5" fill="#b84b22"/> <path d="M60 74 V80" stroke="#b84b22" stroke-width="4" stroke-linecap="round"/> </svg><b>Security</b></span>
+<span class='signal-tile signal-threat'><svg class="signal-visual" viewBox="0 0 120 120" role="img" aria-label=""> <defs> <linearGradient id="threatGrad" x1="20" y1="20" x2="98" y2="96"> <stop offset="0" stop-color="#c58ac8"/> <stop offset="1" stop-color="#733f75"/> </linearGradient> </defs> <circle cx="62" cy="58" r="34" fill="rgba(115,63,117,0.12)" stroke="url(#threatGrad)" stroke-width="5"/> <circle cx="62" cy="58" r="18" fill="none" stroke="#733f75" stroke-width="3" opacity=".72"/> <path d="M62 20 V39 M62 77 V97 M24 58 H43 M81 58 H100" stroke="#733f75" stroke-width="5" stroke-linecap="round"/> <path d="M42 88 L62 58 L84 88 M42 88 H84" fill="none" stroke="#18212b" stroke-width="3" opacity=".34" stroke-linecap="round" stroke-linejoin="round"/> <circle cx="42" cy="88" r="6" fill="#733f75"/> <circle cx="84" cy="88" r="6" fill="#733f75"/> <circle cx="62" cy="58" r="7" fill="#b84b22"/> </svg><b>Threat</b></span>
 </div>
 </section>
 <section class='panel latest-panel'>
