@@ -103,28 +103,106 @@
       align-self: stretch;
       min-height: 220px;
       border-radius: 28px;
-      border: 1px solid rgba(24,33,43,0.1);
+      border: 1px solid rgba(24,33,43,0.16);
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.5), rgba(255,255,255,0.14)),
-        radial-gradient(circle at 60% 40%, rgba(37,95,133,0.18), transparent 48%);
+        linear-gradient(145deg, rgba(20,29,38,0.08), rgba(255,255,255,0.18)),
+        radial-gradient(circle at 60% 40%, rgba(37,95,133,0.22), transparent 48%);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       padding: 16px;
       transform: rotate(-1deg);
     }
-    .hero-orbit span {
+    .signal-tile {
+      position: relative;
       display: grid;
-      place-items: center;
+      place-items: end start;
       border-radius: 20px;
-      background: rgba(255,250,240,0.74);
-      border: 1px solid var(--line);
+      padding: 13px;
+      min-height: 92px;
+      overflow: hidden;
+      background: rgba(255,250,240,0.8);
+      border: 1px solid rgba(24,33,43,0.16);
       font-weight: 900;
-      color: var(--accent-2);
+      color: var(--ink);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+    }
+    .signal-tile b {
+      position: relative;
+      z-index: 2;
+      font-size: 0.9rem;
+    }
+    .signal-tile i {
+      position: absolute;
+      inset: 14px;
+      display: block;
+      opacity: 0.9;
+    }
+    .signal-model i {
+      border-radius: 50%;
+      border: 3px solid rgba(37,95,133,0.7);
+      background:
+        radial-gradient(circle, rgba(37,95,133,0.62) 0 11%, transparent 12% 100%),
+        conic-gradient(from 45deg, transparent 0 18%, rgba(37,95,133,0.34) 18% 25%, transparent 25% 48%, rgba(37,95,133,0.34) 48% 56%, transparent 56%);
+    }
+    .signal-agent i {
+      background:
+        radial-gradient(circle at 22% 30%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
+        radial-gradient(circle at 76% 30%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
+        radial-gradient(circle at 50% 74%, rgba(155,77,27,0.72) 0 7px, transparent 8px),
+        linear-gradient(35deg, transparent 45%, rgba(155,77,27,0.46) 46% 54%, transparent 55%),
+        linear-gradient(-35deg, transparent 45%, rgba(155,77,27,0.46) 46% 54%, transparent 55%);
+    }
+    .signal-security i {
+      width: 58px;
+      height: 68px;
+      left: auto;
+      right: 18px;
+      top: 10px;
+      border-radius: 28px 28px 18px 18px;
+      border: 3px solid rgba(88,101,42,0.75);
+      background:
+        linear-gradient(180deg, rgba(88,101,42,0.16), rgba(88,101,42,0.34));
+    }
+    .signal-security i::before {
+      content: "";
+      position: absolute;
+      width: 38px;
+      height: 24px;
+      border: 3px solid rgba(88,101,42,0.75);
+      border-bottom: 0;
+      border-radius: 22px 22px 0 0;
+      left: 7px;
+      top: -22px;
+    }
+    .signal-threat i {
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(115,63,117,0.56) 49% 51%, transparent 52%),
+        linear-gradient(0deg, transparent 48%, rgba(115,63,117,0.56) 49% 51%, transparent 52%);
+    }
+    .signal-threat i::before,
+    .signal-threat i::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 3px solid rgba(115,63,117,0.66);
+    }
+    .signal-threat i::before {
+      width: 54px;
+      height: 54px;
+      right: 2px;
+      top: 2px;
+    }
+    .signal-threat i::after {
+      width: 16px;
+      height: 16px;
+      left: 4px;
+      bottom: 4px;
     }
     .panel {
       padding: 26px;
       margin-bottom: 18px;
+      background: rgba(255, 251, 243, 0.94);
     }
     .report {
       padding: 0;
@@ -195,10 +273,12 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
     .info-card {
-      border: 1px solid var(--line);
+      border: 1px solid rgba(24,33,43,0.18);
       border-radius: 18px;
       padding: 16px;
-      background: rgba(255, 255, 255, 0.48);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(247,239,226,0.74));
+      box-shadow: 0 10px 24px rgba(64,48,31,0.07);
     }
     .info-card h3 {
       margin: 0 0 8px;
@@ -306,6 +386,7 @@
     .brief-section {
       padding: clamp(18px, 3vw, 26px);
       box-shadow: none;
+      background: rgba(255, 252, 246, 0.96);
     }
     .takeaway-grid {
       display: grid;
@@ -317,11 +398,12 @@
       counter-increment: takeaway;
       min-height: 170px;
       padding: 18px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(24,33,43,0.18);
       border-radius: 24px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.34)),
-        radial-gradient(circle at 10% 0%, rgba(184,75,34,0.13), transparent 42%);
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(245,235,221,0.78)),
+        radial-gradient(circle at 10% 0%, rgba(184,75,34,0.18), transparent 44%);
+      box-shadow: 0 12px 28px rgba(64,48,31,0.08);
     }
     .takeaway-card::before {
       content: "0" counter(takeaway);
@@ -370,10 +452,11 @@
       gap: 16px;
     }
     .topic-card {
-      border: 1px solid var(--line);
+      border: 1px solid rgba(24,33,43,0.2);
       border-radius: 24px;
-      background: rgba(255,255,255,0.44);
+      background: #fffdf8;
       overflow: hidden;
+      box-shadow: 0 14px 34px rgba(64,48,31,0.09);
     }
     .topic-card header {
       padding: 16px 18px;
@@ -381,8 +464,12 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid rgba(24,33,43,0.16);
+      background: linear-gradient(135deg, rgba(37,95,133,0.12), rgba(255,255,255,0.62));
     }
+    .topic-agent header { background: linear-gradient(135deg, rgba(155,77,27,0.16), rgba(255,255,255,0.64)); }
+    .topic-security header { background: linear-gradient(135deg, rgba(88,101,42,0.16), rgba(255,255,255,0.64)); }
+    .topic-threat header { background: linear-gradient(135deg, rgba(115,63,117,0.16), rgba(255,255,255,0.64)); }
     .topic-card h3 {
       font-family: var(--body);
       letter-spacing: 0;
@@ -415,8 +502,23 @@
     .topic-items li {
       padding: 14px;
       border-radius: 18px;
-      background: rgba(255,250,240,0.78);
-      border: 1px solid rgba(24,33,43,0.08);
+      background: #fff7ea;
+      border: 1px solid rgba(24,33,43,0.12);
+      box-shadow: inset 4px 0 0 rgba(184,75,34,0.32);
+    }
+    .topic-model .topic-items li { box-shadow: inset 4px 0 0 rgba(37,95,133,0.34); }
+    .topic-agent .topic-items li { box-shadow: inset 4px 0 0 rgba(155,77,27,0.34); }
+    .topic-security .topic-items li { box-shadow: inset 4px 0 0 rgba(88,101,42,0.34); }
+    .topic-threat .topic-items li { box-shadow: inset 4px 0 0 rgba(115,63,117,0.34); }
+    .topic-model .topic-items li { background: #eef6fb; }
+    .topic-agent .topic-items li { background: #fff4e7; }
+    .topic-security .topic-items li { background: #f4f7e8; }
+    .topic-threat .topic-items li { background: #f7eef8; }
+    .brief-columns .brief-section:nth-child(1) {
+      background: linear-gradient(180deg, rgba(255,252,246,0.98), rgba(238,246,251,0.82));
+    }
+    .brief-columns .brief-section:nth-child(2) {
+      background: linear-gradient(180deg, rgba(255,252,246,0.98), rgba(255,244,231,0.86));
     }
     .related-title {
       margin: 14px 0 8px;
@@ -468,7 +570,10 @@
 <p class='lede'>매일 수집한 AI Model, AI Agent, Security, Threat Modeling 신호를 실무자가 빠르게 읽을 수 있는 브리핑으로 정리합니다.</p>
 </div>
 <div class='hero-orbit' aria-hidden='true'>
-<span>Model</span><span>Agent</span><span>Security</span><span>Threat</span>
+<span class='signal-tile signal-model'><i></i><b>Model</b></span>
+<span class='signal-tile signal-agent'><i></i><b>Agent</b></span>
+<span class='signal-tile signal-security'><i></i><b>Security</b></span>
+<span class='signal-tile signal-threat'><i></i><b>Threat</b></span>
 </div>
 </section>
 <section class='panel latest-panel'>
