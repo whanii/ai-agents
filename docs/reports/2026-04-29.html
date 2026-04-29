@@ -580,9 +580,9 @@
 <span class='brief-date'>2026-04-29</span>
 </div>
 <div class='metric-grid'>
-<div class='metric'><span>Codex</span><strong>4</strong></div>
-<div class='metric'><span>LLM Empty</span><strong>2</strong></div>
-<div class='metric'><span>Cutoff</span><strong>54</strong></div>
+<div class='metric'><span>Codex</span><strong>6</strong></div>
+<div class='metric'><span>LLM Empty</span><strong>0</strong></div>
+<div class='metric'><span>Cutoff</span><strong>59</strong></div>
 </div>
 </div>
 </header>
@@ -591,7 +591,9 @@
 <p class='eyebrow'>Top Signals</p>
 <h2>오늘의 핵심 3가지</h2>
 <div class='takeaway-grid'>
-<article class='takeaway-card'><p>LLM이 핵심 요약을 생성하지 못했습니다.</p></article>
+<article class='takeaway-card'><p>추론 인프라에서는 YiRage와 SGLang처럼 하드웨어 호환성과 서빙 성능을 함께 다루는 도구가 부각되며, 비용과 배포 유연성을 동시에 챙기려는 흐름이 읽힌다.</p></article>
+<article class='takeaway-card'><p>에이전트 운영에서는 Markdown·Git 기반 위키처럼 지식 축적과 변경 이력을 구조화하려는 시도가 나타나며, 협업형 메모리 관리가 실무 과제로 떠오른다.</p></article>
+<article class='takeaway-card'><p>보안 영역에서는 AI 활용 확대 논의와 함께 위협 모델링 표준화, 인력 역할 재설계, 핵심 시스템 보호 우선순위 조정이 함께 요구된다.</p></article>
 </div>
 </section>
 <div class='brief-columns'>
@@ -599,14 +601,18 @@
 <p class='eyebrow'>Executive Read</p>
 <h2>핵심 요약</h2>
 <ul class='clean-list'>
-<li>LLM이 핵심 요약 섹션을 생성하지 못했습니다.</li>
+<li>YiRage는 CUDA·MPS·CPU 등 다양한 백엔드 지원을 내세워 동일 모델 서비스를 여러 인프라에 이식하려는 수요와 맞닿아 있다.</li>
+<li>Threat Dragon과 오픈AI의 사이버보안 실행 계획은 개발 초기 설계와 운영 단계 방어 체계를 따로 보지 말아야 한다는 점을 시사한다.</li>
+<li>보안 인력 관련 Reddit 사례는 자동화 기대가 커져도 현장 부담이 바로 줄지 않을 수 있음을 드러낸다.</li>
 </ul>
 </section>
 <section class='brief-section'>
 <p class='eyebrow'>Action Points</p>
 <h2>실무 적용 포인트</h2>
 <ul class='clean-list'>
-<li>LLM이 실무 적용 포인트를 생성하지 못했습니다.</li>
+<li>모델 서빙 스택은 SGLang과 YiRage를 기준으로 현재 하드웨어, 지연 시간, 운영 비용에 맞는 후보군을 비교 검증할 필요가 있다.</li>
+<li>에이전트 프로젝트에는 Markdown·Git 기반 지식 저장소를 도입해 변경 이력, 재사용 문맥, 감사 추적을 한곳에서 관리하는 방안을 검토할 만하다.</li>
+<li>보안 조직은 Threat Dragon 같은 위협 모델링 도구와 AI 기반 방어 계획을 함께 묶어 설계 검토 절차와 역할 분담을 다시 정비하는 편이 낫다.</li>
 </ul>
 </section>
 </div>
@@ -621,15 +627,15 @@
 </header>
 <div class='topic-content'>
 <ul class='topic-items'>
-<li>⚡ 중요 <a href="https://i.redd.it/ncwdmp21bxxg1.jpeg">Qwen 3.6 27B BF16 vs Q4_K_M vs Q8_0 GGUF evaluation</a> - LLM 요약을 생성하지 못했습니다. 출처: Reddit.</li>
-<li>📎 참고 <a href="https://github.com/RWKV-APP/RWKV_APP">RWKV-APP/RWKV_APP</a> - RWKV-APP/RWKV_APP는 Flutter 기반으로 만든 빠르고 가벼운 RWKV 챗 UI 프로젝트로, 오프라인 사용과 멀티 백엔드 연동을 지원해 로컬 RWKV 추론 환경에 맞춘 확장형 인터페이스를 제공한다. 이는 기업이나 개발팀이 클라우드 의존도를 낮추면서 온디바이스 AI 챗 환경을 더 쉽게 구축·실험할 수 있게 해 배포 유연성과 운영 선택지를 넓힌다. 출처: Discovery: GitHub Search.</li>
+<li>⚡ 중요 <a href="https://github.com/chenxingqiang/YiRage">chenxingqiang/YiRage</a> - GitHub에서 멀티백엔드 LLM 추론 최적화 엔진인 YiRage가 포착됐으며, CUDA·MPS·CPU·Triton·NKI·cuDNN·MKL까지 폭넓게 지원해 Mirage 기반 실행 환경을 확장한다. 운영 측면에서는 동일한 모델 서비스를 다양한 하드웨어와 가속 스택에 맞춰 유연하게 배치하고 성능 튜닝 선택지를 넓힐 수 있어, 인프라 이식성과 비용 최적화에 직접적인 영향을 줄 수 있다. 출처: Discovery: GitHub Search.</li>
+<li>⚡ 중요 <a href="https://github.com/sgl-project/sglang">sgl-project/sglang</a> - sgl-project의 SGLang이 GitHub에서 주목받고 있으며, 대규모 언어 모델과 멀티모달 모델을 고성능으로 서빙하는 프레임워크로 인식되고 있다. 운영 측면에서는 추론 지연과 처리량을 함께 개선할 수 있는 선택지로 검토할 가치가 있어, AI 서비스 인프라 최적화와 배포 효율 향상에 직접적인 영향을 줄 수 있다. 출처: Discovery: GitHub Search.</li>
 </ul>
 <p class='related-title'>Related Signals</p>
 <ul class='related-items'>
 <li><a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a> - Discovery: Hacker News · 총점 79</li>
-<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sxqa2c/im_done_with_using_local_llms_for_coding/">I&#x27;m done with using local LLMs for coding</a> - Reddit · 총점 78</li>
 <li><a href="https://openai.com/index/openai-on-aws">OpenAI models, Codex, and Managed Agents come to AWS</a> - Watchlist: OpenAI Blog · 총점 75</li>
-<li><a href="https://stratechery.com/2026/an-interview-with-openai-ceo-sam-altman-and-aws-ceo-matt-garman-about-bedrock-managed-agents/">OpenAI models coming to Amazon Bedrock: Interview with OpenAI and AWS CEOs</a> - Discovery: Hacker News · 총점 69</li>
+<li><a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a> - Watchlist: Hugging Face Blog · 총점 75</li>
+<li><a href="https://github.com/nirholas/three.ws">nirholas/three.ws</a> - Discovery: GitHub Search · 총점 72</li>
 </ul>
 </div>
 </article>
@@ -640,15 +646,15 @@
 </header>
 <div class='topic-content'>
 <ul class='topic-items'>
-<li>🔥 핵심 <a href="https://github.com/promptfoo/promptfoo">promptfoo/promptfoo</a> - promptfoo는 프롬프트·에이전트·RAG를 대상으로 레드팀 테스트와 취약점 스캐닝을 수행하고, GPT·Claude·Gemini·Llama 등 여러 모델의 성능을 선언형 설정과 CLI, CI/CD 연동으로 비교·검증할 수 있는 AI 보안 테스트 도구로 주목받고 있다. 운영 측면에서는 에이전트 배포 전 단계에서 보안 점검과 모델 평가를 자동화해 위험 노출을 줄이고, 모델 교체나 프롬프트 변경의 품질 영향을 더 빠르게 판단하는 데 직접 도움이 된다. 출처: Discovery: GitHub Search.</li>
-<li>⚡ 중요 <a href="https://github.com/chaterm/Chaterm">chaterm/Chaterm</a> - LLM 요약을 생성하지 못했습니다. 출처: Discovery: GitHub Search.</li>
+<li>⚡ 중요 <a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a> - Hacker News에서 카르파시 스타일의 LLM 위키를 에이전트가 Markdown과 Git 기반으로 직접 유지·관리하는 오픈소스 프로젝트가 주목을 받았다. 에이전트 운영 측면에서는 지식 축적과 변경 이력을 문서화 가능한 형태로 일원화해 협업형 메모리, 감사 추적, 재사용 가능한 컨텍스트 관리 체계를 구축하는 데 참고할 만하다. 출처: Discovery: Hacker News.</li>
+<li>⚡ 중요 <a href="https://www.theregister.com/2026/04/27/from_a_massive_skills_gap/">Cybersecurity professional getting more work and less pay</a> - 사이버보안 인력은 업계의 기술 격차가 계속 거론되는 가운데도 실제로는 업무 부담이 늘고 보상은 줄어드는 압박을 받고 있으며, 현장에서는 기업들이 AI로 보안 역량을 대체하거나 추상화하려는 흐름과 인력 부족 담론이 동시에 제기되고 있다. 이는 보안 조직이 채용난만 전제로 운영하기보다 자동화 확대에 따른 역할 재설계, 핵심 기술 유지, 보상 체계 점검을 함께 추진해야 한다는 신호다. 출처: Reddit.</li>
 </ul>
 <p class='related-title'>Related Signals</p>
 <ul class='related-items'>
-<li><a href="https://github.com/however-yir/knowledgeops-agent">however-yir/knowledgeops-agent</a> - Discovery: GitHub Search · 총점 84</li>
-<li><a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a> - Discovery: Hacker News · 총점 79</li>
-<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sxqa2c/im_done_with_using_local_llms_for_coding/">I&#x27;m done with using local LLMs for coding</a> - Reddit · 총점 78</li>
-<li><a href="https://i.redd.it/ncwdmp21bxxg1.jpeg">Qwen 3.6 27B BF16 vs Q4_K_M vs Q8_0 GGUF evaluation</a> - Reddit · 총점 78</li>
+<li><a href="https://openai.com/index/openai-on-aws">OpenAI models, Codex, and Managed Agents come to AWS</a> - Watchlist: OpenAI Blog · 총점 75</li>
+<li><a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a> - Watchlist: Hugging Face Blog · 총점 75</li>
+<li><a href="https://github.com/nirholas/three.ws">nirholas/three.ws</a> - Discovery: GitHub Search · 총점 72</li>
+<li><a href="https://huggingface.co/blog/nvidia/nemotron-3-nano-omni-multimodal-intelligence">Introducing NVIDIA Nemotron 3 Nano Omni: Long-Context Multimodal Intelligence for Documents, Audio and Video Agents</a> - Watchlist: Hugging Face Blog · 총점 69</li>
 </ul>
 </div>
 </article>
@@ -658,12 +664,15 @@
 <span class='topic-chip'>Security</span>
 </header>
 <div class='topic-content'>
-<p class='muted'>이번 상위 항목에는 포함되지 않았습니다.</p>
+<ul class='topic-items'>
+<li>📎 참고 <a href="https://openai.com/index/cybersecurity-in-the-intelligence-age">Cybersecurity in the Intelligence Age</a> - 오픈AI는 인텔리전스 시대에 맞춰 AI 기반 사이버 방어를 더 널리 보급하고 핵심 시스템을 보호하기 위한 5대 사이버보안 실행 계획을 제시했다. 이는 보안팀이 생성형 AI를 방어 역량 강화에 본격 활용하도록 압박하는 신호로, 중요 인프라와 고위험 환경을 다루는 조직일수록 대응 체계와 투자 우선순위를 재정비해야 한다. 출처: Watchlist: OpenAI Blog.</li>
+</ul>
 <p class='related-title'>Related Signals</p>
 <ul class='related-items'>
 <li><a href="https://www.theregister.com/2026/04/27/from_a_massive_skills_gap/">Cybersecurity professional getting more work and less pay</a> - Reddit · 총점 75</li>
-<li><a href="https://www.schneier.com/blog/archives/2026/04/what-anthropics-mythos-means-for-the-future-of-cybersecurity.html">What Anthropic’s Mythos Means for the Future of Cybersecurity</a> - RSS News · 총점 64</li>
-<li><a href="https://thecybersecguru.com/news/ransomhouse-cybersecurity-vendor-breach-barracuda/">RansomHouse claims breach of a popular Cybersecurity Vendor, possibly Barracuda Networks</a> - Reddit · 총점 51</li>
+<li><a href="https://www.theverge.com/news/920295/github-remote-code-execution-vulnerability-fix">GitHub rushed to fix a critical vulnerability in less than six hours</a> - RSS News · 총점 65</li>
+<li><a href="https://www.reddit.com/r/cybersecurity/comments/1sypdwo/critical_security_vulnerability_with_cpanelwhm/">CRITICAL SECURITY VULNERABILITY WITH CPANEL/WHM, APRIL 28, 2026</a> - Reddit · 총점 63</li>
+<li><a href="https://www.schneier.com/blog/archives/2026/04/what-anthropics-mythos-means-for-the-future-of-cybersecurity.html">What Anthropic’s Mythos Means for the Future of Cybersecurity</a> - RSS News · 총점 58</li>
 </ul>
 </div>
 </article>
@@ -674,25 +683,14 @@
 </header>
 <div class='topic-content'>
 <ul class='topic-items'>
-<li>⚡ 중요 <a href="https://github.com/awslabs/threat-composer">awslabs/threat-composer</a> - AWS Labs의 <code>threat-composer</code>는 위협 모델링의 초기 가치 도달 시간을 줄이도록 설계된 간단한 도구로, 보안 설계 단계에서 사람이 더 빠르게 위협 시나리오를 정리하고 검토할 수 있게 한다. 운영 측면에서는 보안 아키텍처 검토와 개발 초기 위험 식별을 표준화해 모델링 착수 부담을 낮추고, 팀의 보안 검토 속도를 앞당기는 데 직접 연결된다. 출처: Discovery: GitHub Search.</li>
+<li>⚡ 중요 <a href="https://github.com/OWASP/threat-dragon">OWASP/threat-dragon</a> - OWASP의 오픈소스 위협 모델링 도구인 Threat Dragon이 GitHub 검색에서 포착되며, 보안 설계 단계에서 위협을 체계적으로 식별하고 시각화하는 도구에 대한 관심이 이어지고 있다. 운영 측면에서는 개발 초기부터 위협 모델링을 표준화해 보안 검토 누락을 줄이고, 애플리케이션 설계 변경 시 위험 분석을 더 빠르게 반복할 필요가 있다. 출처: Discovery: GitHub Search.</li>
 </ul>
 <p class='related-title'>Related Signals</p>
 <ul class='related-items'>
-<li><a href="https://github.com/promptfoo/promptfoo">promptfoo/promptfoo</a> - Discovery: GitHub Search · 총점 107</li>
-<li><a href="https://github.com/davidmatousek/tachi">davidmatousek/tachi</a> - Discovery: GitHub Search · 총점 55</li>
+<li><a href="https://github.com/davidmatousek/tachi">davidmatousek/tachi</a> - Discovery: GitHub Search · 총점 61</li>
+<li><a href="https://github.com/precogly/precogly">precogly/precogly</a> - Discovery: GitHub Search · 총점 60</li>
 <li><a href="https://github.com/Leathal1/TITO">Show HN: TITO – Automated threat modeling from code (open source)</a> - Discovery: Hacker News · 총점 36</li>
 <li><a href="https://www.devsecai.io/">Show HN: Arko – Real-time AI threat modelling inside Cursor and VS Code</a> - Discovery: Hacker News · 총점 28</li>
-</ul>
-</div>
-</article>
-<article class='topic-card topic-other'>
-<header>
-<h3>Uncategorized</h3>
-<span class='topic-chip'>Uncategorized</span>
-</header>
-<div class='topic-content'>
-<ul class='topic-items'>
-<li>📎 참고 <a href="https://i.redd.it/a0r1ptt6avxg1.jpeg">Duality of r/LocalLLaMA</a> - 레딧 r/LocalLLaMA에서 커뮤니티의 상반된 반응이나 취향 차이를 풍자한 ‘이중성’ 밈이 확산되며, 오픈소스 LLM 이용자층 내부에서도 모델 성능·비용·로컬 실행 방식에 대한 기대가 크게 갈린다는 분위기가 드러났다. 이는 AI 제품·모델 전략을 세울 때 단일 사용자상을 가정하기보다 고성능 지향층과 실용성 지향층을 나눠 메시지, 배포 방식, 가격 판단을 다르게 가져가야 함을 시사한다. 출처: Reddit.</li>
 </ul>
 </div>
 </article>
@@ -703,14 +701,18 @@
 <p class='eyebrow'>Contrast</p>
 <h2>비교</h2>
 <ul class='clean-list'>
-<li>LLM이 비교 섹션을 생성하지 못했습니다.</li>
+<li>YiRage가 백엔드 호환성과 인프라 이식성에 무게를 둔다면, SGLang은 LLM·멀티모달 모델의 고성능 서빙과 처리 효율 개선 쪽에 더 가깝다.</li>
+<li>에이전트 위키 프로젝트가 지식 관리와 협업 메모리에 초점을 맞춘 반면, Threat Dragon은 설계 단계의 보안 위험 식별과 시각화에 집중한다.</li>
+<li>오픈AI 블로그의 보안 계획은 조직 차원의 대응 체계 재편을 요구하고, Reddit 사례는 그 과정에서 인력 부담과 보상 왜곡이 함께 나타날 수 있음을 보여준다.</li>
 </ul>
 </section>
 <section class='brief-section'>
 <p class='eyebrow'>Implications</p>
 <h2>의미 분석</h2>
 <ul class='clean-list'>
-<li>LLM이 의미 분석 섹션을 생성하지 못했습니다.</li>
+<li>AI 서비스 조직은 모델 품질 경쟁만이 아니라 서빙 엔진 선택과 하드웨어 적합성까지 운영 경쟁력의 일부로 다뤄야 한다.</li>
+<li>보안팀은 AI 도입을 인력 대체 논리로만 접근하면 핵심 기술 공백과 업무 과부하가 누적될 수 있어 점진적 역할 재설계가 필요하다.</li>
+<li>문서화 가능한 에이전트 메모리와 표준화된 위협 모델링을 함께 갖추면 지식 손실과 보안 검토 누락을 줄이는 데 도움이 될 수 있다.</li>
 </ul>
 </section>
 </div>
@@ -719,54 +721,49 @@
 <h2>점수와 디버깅</h2>
 <div class='appendix-grid'>
 <details><summary>점수 현황 펼치기</summary><ul>
-<li>리포트 포함 기준: score &gt;= 54, 최대 6개</li>
-<li>동적 기준: 기본 하한 50점과 당일 후보 상위 75퍼센타일 점수 54점 중 더 높은 값을 사용합니다.</li>
+<li>리포트 포함 기준: score &gt;= 59, 최대 6개</li>
+<li>동적 기준: 기본 하한 50점과 당일 후보 상위 75퍼센타일 점수 59점 중 더 높은 값을 사용합니다.</li>
 <li>선정 방식: 기준점 이상 항목 중 토픽별 대표 후보를 먼저 포함하고, 토픽별 최대 2개까지 총점순으로 채웁니다.</li>
 <li>점수 구성: 출처 가중치, 최신성, 인기도, 토픽 매칭, 실용성, 신규성, 교차출처, Discovery/Watchlist 신뢰도를 합산하고 Discovery 불확실성은 감점합니다.</li>
-<li>[포함] promptfoo/promptfoo | 총점=107, 실용성=23, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
-<li>[포함] chaterm/Chaterm | 총점=86, 실용성=10, 신규성=4, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
-<li>[포함] Qwen 3.6 27B BF16 vs Q4_K_M vs Q8_0 GGUF evaluation | 총점=78, 실용성=10, 신규성=4, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
-<li>[포함] awslabs/threat-composer | 총점=77, 실용성=5, 신규성=4, 교차출처=0, 출처신뢰=8, Discovery감점=2</li>
-<li>[포함] RWKV-APP/RWKV_APP | 총점=71, 실용성=11, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
-<li>[포함] Duality of r/LocalLLaMA | 총점=56, 실용성=4, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
-<li>[제외] however-yir/knowledgeops-agent | 총점=84, 실용성=16, 신규성=0, 교차출처=0, 출처신뢰=8, Discovery감점=2</li>
-<li>[제외] Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git) | 총점=79, 실용성=15, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=4</li>
-<li>[제외] I&#x27;m done with using local LLMs for coding | 총점=78, 실용성=14, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
-<li>[제외] Cybersecurity professional getting more work and less pay | 총점=75, 실용성=11, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] OWASP/threat-dragon | 총점=85, 실용성=5, 신규성=8, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
+<li>[포함] chenxingqiang/YiRage | 총점=80, 실용성=12, 신규성=0, 교차출처=0, 출처신뢰=8, Discovery감점=2</li>
+<li>[포함] Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git) | 총점=79, 실용성=15, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=4</li>
+<li>[포함] Cybersecurity professional getting more work and less pay | 총점=75, 실용성=11, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] sgl-project/sglang | 총점=72, 실용성=0, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
+<li>[포함] Cybersecurity in the Intelligence Age | 총점=65, 실용성=6, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
 <li>[제외] OpenAI models, Codex, and Managed Agents come to AWS | 총점=75, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
-<li>[제외] OpenAI models coming to Amazon Bedrock: Interview with OpenAI and AWS CEOs | 총점=69, 실용성=0, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=4</li>
+<li>[제외] DeepSeek-V4: a million-token context that agents can actually use | 총점=75, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
+<li>[제외] nirholas/three.ws | 총점=72, 실용성=20, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
+<li>[제외] Introducing NVIDIA Nemotron 3 Nano Omni: Long-Context Multimodal Intelligence for Documents, Audio and Video Agents | 총점=69, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
 <li>[제외] Something from Mistral (Vibe) tomorrow | 총점=68, 실용성=5, 신규성=5, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
 <li>[제외] Launch HN: Spine Swarm (YC S23) – AI agents that collaborate on a visual canvas | 총점=68, 실용성=10, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=4</li>
-<li>제외 항목 92개는 점수표에서 생략했습니다. 주요 후보는 아래 &#x27;주목할 만한 제외 항목&#x27;을 확인하세요.</li>
+<li>[제외] Show HN: Agent Vault – Open-source credential proxy and vault for agents | 총점=68, 실용성=10, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=4</li>
+<li>[제외] What it feels like to have to have Qwen 3.6 or Gemma 4 running locally | 총점=67, 실용성=9, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>제외 항목 100개는 점수표에서 생략했습니다. 주요 후보는 아래 &#x27;주목할 만한 제외 항목&#x27;을 확인하세요.</li>
 </ul></details>
 <details><summary>주목할 만한 제외 항목 펼치기</summary><ul>
-<li><a href="https://github.com/however-yir/knowledgeops-agent">however-yir/knowledgeops-agent</a> - 총점 84점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
-<li><a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a> - 총점 79점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+<li><a href="https://openai.com/index/openai-on-aws">OpenAI models, Codex, and Managed Agents come to AWS</a> - 총점 75점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+<li><a href="https://huggingface.co/blog/deepseekv4">DeepSeek-V4: a million-token context that agents can actually use</a> - 총점 75점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
 </ul></details>
 <details><summary>링크 펼치기</summary><ul>
-<li><a href="https://i.redd.it/ncwdmp21bxxg1.jpeg">Qwen 3.6 27B BF16 vs Q4_K_M vs Q8_0 GGUF evaluation</a></li>
-<li><a href="https://github.com/promptfoo/promptfoo">promptfoo/promptfoo</a></li>
-<li><a href="https://github.com/awslabs/threat-composer">awslabs/threat-composer</a></li>
-<li><a href="https://github.com/chaterm/Chaterm">chaterm/Chaterm</a></li>
-<li><a href="https://github.com/RWKV-APP/RWKV_APP">RWKV-APP/RWKV_APP</a></li>
-<li><a href="https://i.redd.it/a0r1ptt6avxg1.jpeg">Duality of r/LocalLLaMA</a></li>
+<li><a href="https://github.com/chenxingqiang/YiRage">chenxingqiang/YiRage</a></li>
+<li><a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a></li>
+<li><a href="https://openai.com/index/cybersecurity-in-the-intelligence-age">Cybersecurity in the Intelligence Age</a></li>
+<li><a href="https://github.com/OWASP/threat-dragon">OWASP/threat-dragon</a></li>
+<li><a href="https://www.theregister.com/2026/04/27/from_a_massive_skills_gap/">Cybersecurity professional getting more work and less pay</a></li>
+<li><a href="https://github.com/sgl-project/sglang">sgl-project/sglang</a></li>
 </ul></details>
 <details><summary>디버깅 정보 펼치기</summary><ul>
 <li>OpenAI API 실패 정보:</li>
 <li>OPENAI_API_KEY missing: 6개</li>
-<li>Codex CLI 실패 정보:</li>
-<li>Codex CLI unavailable: TimeoutExpired: runtime=windows resolved=C:\Users\chaee\.cursor\extensions\openai.chatgpt-26.422.30944-win32-x64\bin\windows-x86_64\codex.exe: 2개</li>
-<li>리포트 섹션 생성 실패 정보:</li>
-<li>OpenAI=OPENAI_API_KEY missing</li>
-<li>Codex=Codex CLI unavailable: TimeoutExpired: runtime=windows resolved=C:\Users\chaee\.cursor\extensions\openai.chatgpt-26.422.30944-win32-x64\bin\windows-x86_64\codex.exe</li>
 <li>선택 항목별 실패 정보:</li>
-<li>Qwen 3.6 27B BF16 vs Q4_K_M vs Q8_0 GGUF evaluation: OpenAI=OPENAI_API_KEY missing | Codex=Codex CLI unavailable: TimeoutExpired: runtime=windows resolved=C:\Users\chaee\.cursor\extensions\openai.chatgpt-26.422.30944-win32-x64\bin\windows-x86_64\codex.exe</li>
-<li>promptfoo/promptfoo: OpenAI=OPENAI_API_KEY missing</li>
-<li>awslabs/threat-composer: OpenAI=OPENAI_API_KEY missing</li>
-<li>chaterm/Chaterm: OpenAI=OPENAI_API_KEY missing | Codex=Codex CLI unavailable: TimeoutExpired: runtime=windows resolved=C:\Users\chaee\.cursor\extensions\openai.chatgpt-26.422.30944-win32-x64\bin\windows-x86_64\codex.exe</li>
-<li>RWKV-APP/RWKV_APP: OpenAI=OPENAI_API_KEY missing</li>
-<li>Duality of r/LocalLLaMA: OpenAI=OPENAI_API_KEY missing</li>
-<li>_Generated at 2026-04-29T16:50:51.131896._</li>
+<li>chenxingqiang/YiRage: OpenAI=OPENAI_API_KEY missing</li>
+<li>Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git): OpenAI=OPENAI_API_KEY missing</li>
+<li>Cybersecurity in the Intelligence Age: OpenAI=OPENAI_API_KEY missing</li>
+<li>OWASP/threat-dragon: OpenAI=OPENAI_API_KEY missing</li>
+<li>Cybersecurity professional getting more work and less pay: OpenAI=OPENAI_API_KEY missing</li>
+<li>sgl-project/sglang: OpenAI=OPENAI_API_KEY missing</li>
+<li>_Generated at 2026-04-29T23:51:40.209135._</li>
 </ul></details>
 </div>
 </section>
