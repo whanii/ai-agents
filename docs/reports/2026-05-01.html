@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Trend Report 2026-05-01</title>
+  <meta name="description" content="2026-05-01 generated AI trend report.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f2eadc;
+      --bg-deep: #d9cbb8;
+      --panel: rgba(255, 252, 244, 0.88);
+      --panel-strong: #fffaf0;
+      --ink: #18212b;
+      --muted: #66717d;
+      --accent: #b84b22;
+      --accent-2: #255f85;
+      --accent-3: #58652a;
+      --accent-soft: #f4d5bf;
+      --line: rgba(24, 33, 43, 0.13);
+      --shadow: 0 24px 70px rgba(64, 48, 31, 0.16);
+      --radius-xl: 30px;
+      --radius-md: 18px;
+      --display: "Iowan Old Style", "Sitka Display", Cambria, Georgia, serif;
+      --body: Aptos, "Segoe UI Variable Text", "Noto Sans KR", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--body);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255, 255, 255, 0.88), transparent 30%),
+        radial-gradient(circle at 90% 12%, rgba(184, 75, 34, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--bg-deep) 0%, var(--bg) 36%, #f7f1e8 100%);
+      line-height: 1.65;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(24, 33, 43, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24, 33, 43, 0.028) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 70%);
+    }
+    .shell {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 30px 0 64px;
+      position: relative;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+    .topbar a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,255,255,0.46);
+    }
+    .brief-hero, .panel, .report, .brief-section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+    .brief-hero {
+      padding: clamp(24px, 4vw, 44px);
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.75fr);
+      gap: 26px;
+      overflow: hidden;
+      position: relative;
+    }
+    .brief-hero::after {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      right: -110px;
+      bottom: -130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,75,34,0.28), transparent 68%);
+    }
+    .brief-hero h1 {
+      max-width: 820px;
+    }
+    .hero-orbit {
+      align-self: stretch;
+      min-height: 220px;
+      border-radius: 28px;
+      border: 1px solid rgba(24,33,43,0.16);
+      background:
+        linear-gradient(145deg, rgba(20,29,38,0.08), rgba(255,255,255,0.18)),
+        radial-gradient(circle at 60% 40%, rgba(37,95,133,0.22), transparent 48%);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 16px;
+      transform: rotate(-1deg);
+    }
+    .signal-tile {
+      position: relative;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      align-items: end;
+      border-radius: 20px;
+      padding: 10px 12px 12px;
+      min-height: 118px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,253,247,0.94), rgba(246,235,219,0.78)),
+        radial-gradient(circle at 16% 12%, rgba(255,255,255,0.9), transparent 42%);
+      border: 1px solid rgba(24,33,43,0.2);
+      font-weight: 900;
+      color: var(--ink);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        0 14px 26px rgba(64,48,31,0.12);
+    }
+    .signal-tile::after {
+      content: "";
+      position: absolute;
+      inset: auto -18px -30px 28%;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(24,33,43,0.08);
+      filter: blur(12px);
+    }
+    .signal-visual {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 84px;
+      filter: drop-shadow(0 9px 12px rgba(64,48,31,0.16));
+    }
+    .signal-model {
+      background: linear-gradient(180deg, #fafdff, #e8f3f9);
+    }
+    .signal-agent {
+      background: linear-gradient(180deg, #fffaf3, #faead8);
+    }
+    .signal-security {
+      background: linear-gradient(180deg, #fbfff3, #edf3d8);
+    }
+    .signal-threat {
+      background: linear-gradient(180deg, #fff8ff, #f1e3f2);
+    }
+    .signal-tile b {
+      position: relative;
+      z-index: 3;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.72);
+    }
+    .panel {
+      padding: 26px;
+      margin-bottom: 18px;
+      background: rgba(255, 251, 243, 0.94);
+    }
+    .report {
+      padding: 0;
+      overflow: hidden;
+      background: rgba(255,250,240,0.72);
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+    h1, h2, h3 {
+      line-height: 1.2;
+      font-family: var(--display);
+      letter-spacing: -0.03em;
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(2.35rem, 6vw, 5.1rem); }
+    h2 { margin: 0 0 14px; font-size: clamp(1.55rem, 3vw, 2.3rem); }
+    h3 { margin: 0 0 10px; font-size: 1.2rem; }
+    p, li { font-size: 1rem; }
+    .lede, .meta { color: var(--muted); }
+    .primary-link {
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .brief-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid rgba(24,33,43,0.18);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(238,246,251,0.72)),
+        var(--panel-strong);
+      box-shadow: 0 18px 34px rgba(64,48,31,0.1);
+      font-size: 1.15rem;
+    }
+    .brief-link strong {
+      color: var(--accent);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .report-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .report-list a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      display: block;
+      font-weight: 750;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .feature-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .info-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(24,33,43,0.18);
+      border-radius: 18px;
+      padding: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(247,239,226,0.84));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        0 14px 30px rgba(64,48,31,0.09);
+    }
+    .info-card::before {
+      content: "";
+      display: block;
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      background: var(--accent);
+    }
+    .feature-grid .info-card:nth-child(4n+1) {
+      background: linear-gradient(180deg, #ffffff, #eef6fb);
+    }
+    .feature-grid .info-card:nth-child(4n+1)::before {
+      background: #255f85;
+    }
+    .feature-grid .info-card:nth-child(4n+2) {
+      background: linear-gradient(180deg, #ffffff, #fff2e2);
+    }
+    .feature-grid .info-card:nth-child(4n+2)::before {
+      background: #9b4d1b;
+    }
+    .feature-grid .info-card:nth-child(4n+3) {
+      background: linear-gradient(180deg, #ffffff, #f2f7df);
+    }
+    .feature-grid .info-card:nth-child(4n+3)::before {
+      background: #58652a;
+    }
+    .feature-grid .info-card:nth-child(4n+4) {
+      background: linear-gradient(180deg, #ffffff, #f7edf8);
+    }
+    .feature-grid .info-card:nth-child(4n+4)::before {
+      background: #733f75;
+    }
+    .info-card h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-family: var(--body);
+      letter-spacing: 0;
+    }
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .report a {
+      color: var(--accent);
+      font-weight: 760;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.16em;
+    }
+    code {
+      background: rgba(31, 41, 51, 0.06);
+      border-radius: 6px;
+      padding: 0.12rem 0.32rem;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #1d242b;
+      color: #f5f7fa;
+      padding: 16px;
+      border-radius: 16px;
+      overflow-x: auto;
+    }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.2rem 0 0.2rem 1rem;
+      border-left: 4px solid var(--accent-soft);
+      color: var(--muted);
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.52);
+    }
+    .score-details {
+      margin-top: 16px;
+    }
+    summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 850;
+    }
+    .brief-header {
+      padding: clamp(24px, 4vw, 44px);
+      background:
+        radial-gradient(circle at 85% 20%, rgba(37,95,133,0.16), transparent 32%),
+        linear-gradient(135deg, rgba(255,250,240,0.98), rgba(246,232,212,0.72));
+      border-bottom: 1px solid var(--line);
+    }
+    .brief-header-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: start;
+    }
+    .brief-date {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: rgba(255,255,255,0.58);
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(92px, 1fr));
+      gap: 10px;
+      min-width: 320px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(255,255,255,0.58);
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.28rem;
+      font-family: var(--display);
+    }
+    .brief-body {
+      padding: clamp(20px, 3vw, 34px);
+      display: grid;
+      gap: 22px;
+    }
+    .brief-section {
+      padding: clamp(18px, 3vw, 26px);
+      box-shadow: none;
+      background: rgba(255, 252, 246, 0.96);
+    }
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      counter-reset: takeaway;
+    }
+    .takeaway-card {
+      counter-increment: takeaway;
+      min-height: 170px;
+      padding: 18px;
+      border: 1px solid rgba(24,33,43,0.18);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(245,235,221,0.78)),
+        radial-gradient(circle at 10% 0%, rgba(184,75,34,0.18), transparent 44%);
+      box-shadow: 0 12px 28px rgba(64,48,31,0.08);
+    }
+    .takeaway-card::before {
+      content: "0" counter(takeaway);
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .takeaway-card p {
+      margin: 0;
+      font-weight: 760;
+      line-height: 1.55;
+    }
+    .brief-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .clean-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .clean-list li {
+      position: relative;
+      padding-left: 18px;
+    }
+    .clean-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .topic-card {
+      border: 1px solid rgba(24,33,43,0.2);
+      border-radius: 24px;
+      background: #fffdf8;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(64,48,31,0.09);
+    }
+    .topic-card header {
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(24,33,43,0.16);
+      background: linear-gradient(135deg, rgba(37,95,133,0.12), rgba(255,255,255,0.62));
+    }
+    .topic-agent header { background: linear-gradient(135deg, rgba(155,77,27,0.16), rgba(255,255,255,0.64)); }
+    .topic-security header { background: linear-gradient(135deg, rgba(88,101,42,0.16), rgba(255,255,255,0.64)); }
+    .topic-threat header { background: linear-gradient(135deg, rgba(115,63,117,0.16), rgba(255,255,255,0.64)); }
+    .topic-card h3 {
+      font-family: var(--body);
+      letter-spacing: 0;
+      margin: 0;
+    }
+    .topic-chip {
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+      background: var(--accent-2);
+    }
+    .topic-model .topic-chip { background: #255f85; }
+    .topic-agent .topic-chip { background: #9b4d1b; }
+    .topic-security .topic-chip { background: #58652a; }
+    .topic-threat .topic-chip { background: #733f75; }
+    .topic-content {
+      padding: 16px 18px 18px;
+    }
+    .topic-items, .related-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .topic-items li {
+      padding: 14px;
+      border-radius: 18px;
+      background: #fff7ea;
+      border: 1px solid rgba(24,33,43,0.12);
+      box-shadow: inset 4px 0 0 rgba(184,75,34,0.32);
+    }
+    .topic-model .topic-items li { box-shadow: inset 4px 0 0 rgba(37,95,133,0.34); }
+    .topic-agent .topic-items li { box-shadow: inset 4px 0 0 rgba(155,77,27,0.34); }
+    .topic-security .topic-items li { box-shadow: inset 4px 0 0 rgba(88,101,42,0.34); }
+    .topic-threat .topic-items li { box-shadow: inset 4px 0 0 rgba(115,63,117,0.34); }
+    .topic-model .topic-items li { background: #eef6fb; }
+    .topic-agent .topic-items li { background: #fff4e7; }
+    .topic-security .topic-items li { background: #f4f7e8; }
+    .topic-threat .topic-items li { background: #f7eef8; }
+    .brief-columns .brief-section:nth-child(1) {
+      background: linear-gradient(180deg, rgba(255,252,246,0.98), rgba(238,246,251,0.82));
+    }
+    .brief-columns .brief-section:nth-child(2) {
+      background: linear-gradient(180deg, rgba(255,252,246,0.98), rgba(255,244,231,0.86));
+    }
+    .related-title {
+      margin: 14px 0 8px;
+      color: var(--muted);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.76rem;
+    }
+    .related-items li {
+      font-size: 0.93rem;
+      color: var(--muted);
+      padding-left: 14px;
+      border-left: 2px solid var(--accent-soft);
+    }
+    .appendix-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .appendix-grid details ul {
+      margin-bottom: 0;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    @media (max-width: 720px) {
+      .shell { width: min(100vw - 20px, 1120px); padding-top: 18px; }
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .brief-hero, .panel, .report, .brief-section { border-radius: 22px; }
+      .brief-hero, .brief-header-grid, .brief-columns, .topic-grid, .takeaway-grid, .info-grid, .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-orbit { min-height: 150px; }
+      .metric-grid { min-width: 0; grid-template-columns: repeat(3, 1fr); }
+      .metric strong { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <a href="../index.html">Home</a>
+      <span class="meta">Published with GitHub Pages</span>
+    </div>
+    <article class='report'>
+<header class='brief-header'>
+<div class='brief-header-grid'>
+<div>
+<p class='eyebrow'>AI Trend Brief</p>
+<h1>AI Trend Report</h1>
+<span class='brief-date'>2026-05-01</span>
+</div>
+<div class='metric-grid'>
+<div class='metric'><span>Codex</span><strong>6</strong></div>
+<div class='metric'><span>LLM Empty</span><strong>0</strong></div>
+<div class='metric'><span>Cutoff</span><strong>58</strong></div>
+</div>
+</div>
+</header>
+<div class='brief-body'>
+<section class='brief-section'>
+<p class='eyebrow'>Top Signals</p>
+<h2>오늘의 핵심 3가지</h2>
+<div class='takeaway-grid'>
+<article class='takeaway-card'><p>AI 에이전트 활용이 코드 작성에서 배포·운영 자동화와 앱 통합 프레임워크까지 넓어지며 개발 스택 전반으로 확장되는 흐름이 확인된다.</p></article>
+<article class='takeaway-card'><p>보안 분야에서는 위협 모델 템플릿과 AI 기반 방어 전략이 함께 부각되면서 설계 초기 표준화와 운영 대응 고도화를 병행하려는 움직임이 읽힌다.</p></article>
+<article class='takeaway-card'><p>로컬 LLM 비교 논의에서는 성능만이 아니라 라이선스 변경과 배포 조건까지 함께 따져야 한다는 현실적 검토 기준이 강조된다.</p></article>
+</div>
+</section>
+<div class='brief-columns'>
+<section class='brief-section'>
+<p class='eyebrow'>Executive Read</p>
+<h2>핵심 요약</h2>
+<ul class='clean-list'>
+<li><code>aidevops</code>와 <code>eforge</code>는 AI를 개발 보조 도구가 아니라 자동화된 운영 및 검증 체계의 일부로 편입하려는 시도를 보여준다.</li>
+<li><code>mastra</code>의 주목은 TypeScript 기반 웹 개발 환경에서 에이전트 기능을 빠르게 붙이려는 수요가 커질 수 있음을 시사한다.</li>
+<li>보안 관련 항목들은 템플릿 기반 설계와 조직 차원의 대응 우선순위 재정비를 함께 요구하고 있다.</li>
+</ul>
+</section>
+<section class='brief-section'>
+<p class='eyebrow'>Action Points</p>
+<h2>실무 적용 포인트</h2>
+<ul class='clean-list'>
+<li>에이전트 도입을 검토하는 팀은 프로토타입 단계에서 끝내지 말고 배포 자동화, 리뷰 절차, 품질 검증까지 포함한 운영 설계를 먼저 점검할 필요가 있다.</li>
+<li>로컬 또는 오픈 모델을 평가할 때는 성능표와 함께 상업적 사용 가능 여부, 배포 제약, 대체 후보를 한 번에 비교하는 기준표를 마련하는 편이 낫다.</li>
+<li>AI 시스템을 개발하는 조직이라면 위협 모델 템플릿을 활용해 초기 설계 리뷰를 표준화하고 보안 운영에서 AI 적용 우선순위를 재정리하는 작업이 유효하다.</li>
+</ul>
+</section>
+</div>
+<section class='brief-section'>
+<p class='eyebrow'>Topic Radar</p>
+<h2>트렌드 분류</h2>
+<div class='topic-grid'>
+<article class='topic-card topic-model'>
+<header>
+<h3>AI Model</h3>
+<span class='topic-chip'>Model</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>⚡ 중요 <a href="https://github.com/PatrickGallucci/threat-model-templates">PatrickGallucci/threat-model-templates</a> - PatrickGallucci가 Microsoft Threat Modeling Tool용 위협 모델 템플릿 저장소를 공개해 AI 모델 관련 보안 설계를 더 빠르게 구조화할 수 있게 했다. 운영 측면에서는 팀이 위협 식별과 리뷰 기준을 템플릿으로 표준화해 설계 초기부터 보안 검토를 앞당기고, AI 시스템의 배포 리스크를 줄이는 데 바로 활용할 수 있다. 출처: Discovery: GitHub Search.</li>
+<li>⚡ 중요 <a href="https://i.redd.it/iumiec7nsdyg1.png">Open Models - April 2026 - One of the best months of all time for Local LLMs?</a> - 레딧에서 2026년 4월을 로컬 LLM에 특히 강한 달로 평가하며 여러 오픈 모델을 비교한 그래프가 공유됐고, MiniMax-M2.7은 라이선스가 MIT에서 비상업용으로 바뀌어 그래프에서 제외됐다는 점도 함께 언급됐다. 현업에서는 성능뿐 아니라 배포 방식과 라이선스 조건까지 함께 검토해야 하며, 로컬 모델 채택이나 대체 모델 탐색 속도가 더 빨라질 가능성이 있다. 출처: Reddit.</li>
+</ul>
+<p class='related-title'>Related Signals</p>
+<ul class='related-items'>
+<li><a href="https://github.com/marcusquinn/aidevops">marcusquinn/aidevops</a> - Discovery: GitHub Search · 총점 103</li>
+<li><a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a> - Discovery: Hacker News · 총점 79</li>
+<li><a href="https://github.com/nirholas/three.ws">nirholas/three.ws</a> - Discovery: GitHub Search · 총점 73</li>
+<li><a href="https://github.com/TauricResearch/TradingAgents">TauricResearch/TradingAgents</a> - GitHub Trending · 총점 71</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-agent'>
+<header>
+<h3>AI Agent</h3>
+<span class='topic-chip'>Agent</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>🔥 핵심 <a href="https://github.com/marcusquinn/aidevops">marcusquinn/aidevops</a> - GitHub에서 <code>marcusquinn/aidevops</code>가 공개되며 OpenCode와 Git 기반의 토큰 효율적 AI 에이전트 자동화 스택을 통해 앱 개발과 DevOps 운영을 빠르고 안전하게 처리하겠다는 오픈소스 프로젝트가 부상했다. 개발팀 입장에서는 AI 모델을 코드 작성에만 쓰는 수준을 넘어 배포·보안·반복 운영까지 24시간 자동화하는 실험이 확산될 수 있어, 에이전트 중심 개발 도구와 운영 체계 도입 경쟁이 한층 빨라질 수 있다. 출처: Discovery: GitHub Search.</li>
+<li>⚡ 중요 <a href="https://github.com/mastra-ai/mastra">mastra-ai/mastra</a> - Gatsby 팀이 만든 Mastra가 최신 TypeScript 스택으로 AI 애플리케이션과 에이전트를 구축할 수 있는 프레임워크로 GitHub에서 주목받고 있다. 운영 측면에서는 웹 개발 친화적인 기술 기반으로 에이전트 기능을 빠르게 제품에 통합하려는 팀의 도입 검토가 늘 수 있어, 개발 표준화와 프로토타이핑 속도에 영향을 줄 가능성이 크다. 출처: Discovery: GitHub Search.</li>
+</ul>
+<p class='related-title'>Related Signals</p>
+<ul class='related-items'>
+<li><a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a> - Discovery: Hacker News · 총점 79</li>
+<li><a href="https://pu.dev/">Show HN: Pu.sh – a full coding-agent harness in 400 lines of shell</a> - Discovery: Hacker News · 총점 74</li>
+<li><a href="https://www.reddit.com/r/artificial/comments/1szoe78/anthropic_mass_shipped_9_connectors_and/">Anthropic mass shipped 9 connectors and accidentally leaked their entire creative industry strategy</a> - Reddit · 총점 73</li>
+<li><a href="https://github.com/nirholas/three.ws">nirholas/three.ws</a> - Discovery: GitHub Search · 총점 73</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-security'>
+<header>
+<h3>Security</h3>
+<span class='topic-chip'>Security</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>📎 참고 <a href="https://openai.com/index/cybersecurity-in-the-intelligence-age">Cybersecurity in the Intelligence Age</a> - OpenAI는 인텔리전스 시대의 사이버보안 강화를 위해 AI 기반 방어 역량의 민주화와 핵심 시스템 보호를 중심으로 한 5대 실행 계획을 제시했다. 이에 따라 기업과 공공기관은 보안 운영에 AI를 더 폭넓게 도입하는 동시에 중요 인프라 보호, 대응 체계 고도화, 우선순위 재정비를 서둘러야 한다. 출처: Watchlist: OpenAI Blog.</li>
+</ul>
+<p class='related-title'>Related Signals</p>
+<ul class='related-items'>
+<li><a href="https://www.schneier.com/blog/archives/2026/04/what-anthropics-mythos-means-for-the-future-of-cybersecurity.html">What Anthropic’s Mythos Means for the Future of Cybersecurity</a> - RSS News · 총점 58</li>
+<li><a href="https://techcrunch.com/2026/04/30/after-dissing-anthropic-for-limiting-mythos-openai-restricts-access-to-cyber-too/">After dissing Anthropic for limiting Mythos, OpenAI restricts access to Cyber, too</a> - RSS News · 총점 56</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-threat'>
+<header>
+<h3>Threat Modeling</h3>
+<span class='topic-chip'>Threat</span>
+</header>
+<div class='topic-content'>
+<p class='muted'>이번 상위 항목에는 포함되지 않았습니다.</p>
+<p class='related-title'>Related Signals</p>
+<ul class='related-items'>
+<li><a href="https://github.com/Leathal1/TITO">Show HN: TITO – Automated threat modeling from code (open source)</a> - Discovery: Hacker News · 총점 36</li>
+<li><a href="https://www.devsecai.io/">Show HN: Arko – Real-time AI threat modelling inside Cursor and VS Code</a> - Discovery: Hacker News · 총점 28</li>
+<li><a href="https://github.com/attasec/tmdd">Show HN: TMDD – continuous threat modelling that makes your code more secure</a> - Discovery: Hacker News · 총점 28</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-other'>
+<header>
+<h3>Uncategorized</h3>
+<span class='topic-chip'>Uncategorized</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>📎 참고 <a href="https://github.com/eforge-build/eforge">eforge-build/eforge</a> - GitHub에서 공개된 오픈소스 에이전트형 빌드 시스템 eforge는 명세를 검증된 소스 코드로 변환하고 블라인드 적대적 리뷰를 결합해 코드 생성의 신뢰성을 높이는 접근을 내세웠다. 개발 조직 입장에서는 AI 코딩 도구를 실험 단계에서 실제 빌드 파이프라인으로 확장할 때 품질 검증과 자동 리뷰를 함께 설계하는 흐름에 영향을 줄 수 있다. 출처: Discovery: GitHub Search.</li>
+</ul>
+</div>
+</article>
+</div>
+</section>
+<div class='brief-columns'>
+<section class='brief-section'>
+<p class='eyebrow'>Contrast</p>
+<h2>비교</h2>
+<ul class='clean-list'>
+<li><code>aidevops</code>가 개발과 DevOps의 연속 자동화에 무게를 둔다면 <code>mastra</code>는 애플리케이션에 에이전트를 붙이는 개발 프레임워크 성격이 더 강하다.</li>
+<li><code>threat-model-templates</code>는 실무 설계 단계의 표준화 도구에 가깝고 OpenAI의 사이버보안 제안은 조직 차원의 방어 역량과 핵심 인프라 보호에 초점을 둔다.</li>
+<li>로컬 LLM 논의는 모델 성능 비교에서 출발하지만, 다른 항목들보다 라이선스 조건 변화가 도입 판단에 직접적인 변수로 더 크게 작용한다.</li>
+</ul>
+</section>
+<section class='brief-section'>
+<p class='eyebrow'>Implications</p>
+<h2>의미 분석</h2>
+<ul class='clean-list'>
+<li>개발 조직은 AI 도구 채택 경쟁보다 자동화 범위와 검증 절차를 어떻게 묶을지에 따라 실제 운영 성과가 갈릴 가능성이 크다.</li>
+<li>보안과 개발이 분리된 채로 AI 시스템을 확장하면 배포 속도는 나와도 검토 누락 위험이 커질 수 있어 초기 협업 구조가 더 중요해진다.</li>
+<li>오픈소스 AI 모델과 에이전트 도구의 선택은 앞으로 기술 적합성뿐 아니라 라이선스 안정성과 운영 통제 가능성까지 함께 따지는 방향으로 굳어질 수 있다.</li>
+</ul>
+</section>
+</div>
+<section class='brief-section'>
+<p class='eyebrow'>Appendix</p>
+<h2>점수와 디버깅</h2>
+<div class='appendix-grid'>
+<details><summary>점수 현황 펼치기</summary><ul>
+<li>리포트 포함 기준: score &gt;= 58, 최대 6개</li>
+<li>동적 기준: 기본 하한 50점과 당일 후보 상위 75퍼센타일 점수 58점 중 더 높은 값을 사용합니다.</li>
+<li>선정 방식: 기준점 이상 항목 중 토픽별 대표 후보를 먼저 포함하고, 토픽별 최대 2개까지 총점순으로 채웁니다.</li>
+<li>점수 구성: 출처 가중치, 최신성, 인기도, 토픽 매칭, 실용성, 신규성, 교차출처, Discovery/Watchlist 신뢰도를 합산하고 Discovery 불확실성은 감점합니다.</li>
+<li>[포함] marcusquinn/aidevops | 총점=103, 실용성=24, 신규성=5, 교차출처=0, 출처신뢰=8, Discovery감점=2</li>
+<li>[포함] mastra-ai/mastra | 총점=82, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=2</li>
+<li>[포함] PatrickGallucci/threat-model-templates | 총점=77, 실용성=11, 신규성=4, 교차출처=0, 출처신뢰=8, Discovery감점=2</li>
+<li>[포함] Open Models - April 2026 - One of the best months of all time for Local LLMs? | 총점=73, 실용성=9, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] eforge-build/eforge | 총점=65, 실용성=12, 신규성=4, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
+<li>[포함] Cybersecurity in the Intelligence Age | 총점=65, 실용성=6, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
+<li>[제외] Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git) | 총점=79, 실용성=15, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=4</li>
+<li>[제외] Show HN: Pu.sh – a full coding-agent harness in 400 lines of shell | 총점=74, 실용성=5, 신규성=5, 교차출처=0, 출처신뢰=12, Discovery감점=4</li>
+<li>[제외] Anthropic mass shipped 9 connectors and accidentally leaked their entire creative industry strategy | 총점=73, 실용성=10, 신규성=5, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] nirholas/three.ws | 총점=73, 실용성=20, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
+<li>[제외] TauricResearch/TradingAgents | 총점=71, 실용성=15, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] DeepSeek released &#x27;Thinking-with-Visual-Primitives&#x27; framework | 총점=70, 실용성=7, 신규성=5, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] Tom-Ryder/AgentRunKit | 총점=69, 실용성=17, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
+<li>[제외] Introducing NVIDIA Nemotron 3 Nano Omni: Long-Context Multimodal Intelligence for Documents, Audio and Video Agents | 총점=69, 실용성=10, 신규성=0, 교차출처=0, 출처신뢰=12, Discovery감점=0</li>
+<li>제외 항목 101개는 점수표에서 생략했습니다. 주요 후보는 아래 &#x27;주목할 만한 제외 항목&#x27;을 확인하세요.</li>
+</ul></details>
+<details><summary>주목할 만한 제외 항목 펼치기</summary><ul>
+<li><a href="https://github.com/nex-crm/wuphf">Show HN: A Karpathy-style LLM wiki your agents maintain (Markdown and Git)</a> - 총점 79점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+<li><a href="https://pu.dev/">Show HN: Pu.sh – a full coding-agent harness in 400 lines of shell</a> - 총점 74점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+</ul></details>
+<details><summary>링크 펼치기</summary><ul>
+<li><a href="https://github.com/PatrickGallucci/threat-model-templates">PatrickGallucci/threat-model-templates</a></li>
+<li><a href="https://github.com/marcusquinn/aidevops">marcusquinn/aidevops</a></li>
+<li><a href="https://openai.com/index/cybersecurity-in-the-intelligence-age">Cybersecurity in the Intelligence Age</a></li>
+<li><a href="https://github.com/mastra-ai/mastra">mastra-ai/mastra</a></li>
+<li><a href="https://i.redd.it/iumiec7nsdyg1.png">Open Models - April 2026 - One of the best months of all time for Local LLMs?</a></li>
+<li><a href="https://github.com/eforge-build/eforge">eforge-build/eforge</a></li>
+</ul></details>
+<details><summary>디버깅 정보 펼치기</summary><ul>
+<li>OpenAI API 실패 정보:</li>
+<li>OPENAI_API_KEY missing: 6개</li>
+<li>선택 항목별 실패 정보:</li>
+<li>PatrickGallucci/threat-model-templates: OpenAI=OPENAI_API_KEY missing</li>
+<li>marcusquinn/aidevops: OpenAI=OPENAI_API_KEY missing</li>
+<li>Cybersecurity in the Intelligence Age: OpenAI=OPENAI_API_KEY missing</li>
+<li>mastra-ai/mastra: OpenAI=OPENAI_API_KEY missing</li>
+<li>Open Models - April 2026 - One of the best months of all time for Local LLMs?: OpenAI=OPENAI_API_KEY missing</li>
+<li>eforge-build/eforge: OpenAI=OPENAI_API_KEY missing</li>
+<li>_Generated at 2026-05-01T10:44:03.114887._</li>
+</ul></details>
+</div>
+</section>
+</div>
+</article>
+  </main>
+</body>
+</html>
