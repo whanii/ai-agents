@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Trend Report 2026-05-15</title>
+  <meta name="description" content="2026-05-15 generated AI trend report.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f2eadc;
+      --bg-deep: #d9cbb8;
+      --panel: rgba(255, 252, 244, 0.88);
+      --panel-strong: #fffaf0;
+      --ink: #18212b;
+      --muted: #66717d;
+      --accent: #b84b22;
+      --accent-2: #255f85;
+      --accent-3: #58652a;
+      --accent-soft: #f4d5bf;
+      --line: rgba(24, 33, 43, 0.13);
+      --shadow: 0 24px 70px rgba(64, 48, 31, 0.16);
+      --radius-xl: 30px;
+      --radius-md: 18px;
+      --display: "Iowan Old Style", "Sitka Display", Cambria, Georgia, serif;
+      --body: Aptos, "Segoe UI Variable Text", "Noto Sans KR", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--body);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255, 255, 255, 0.88), transparent 30%),
+        radial-gradient(circle at 90% 12%, rgba(184, 75, 34, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--bg-deep) 0%, var(--bg) 36%, #f7f1e8 100%);
+      line-height: 1.65;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(24, 33, 43, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24, 33, 43, 0.028) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 70%);
+    }
+    .shell {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 30px 0 64px;
+      position: relative;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+    .topbar a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,255,255,0.46);
+    }
+    .brief-hero, .panel, .report, .brief-section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+    .brief-hero {
+      padding: clamp(24px, 4vw, 44px);
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.75fr);
+      gap: 26px;
+      overflow: hidden;
+      position: relative;
+    }
+    .brief-hero::after {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      right: -110px;
+      bottom: -130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,75,34,0.28), transparent 68%);
+    }
+    .brief-hero h1 {
+      max-width: 820px;
+    }
+    .hero-orbit {
+      align-self: stretch;
+      min-height: 220px;
+      border-radius: 28px;
+      border: 1px solid rgba(24,33,43,0.16);
+      background:
+        linear-gradient(145deg, rgba(20,29,38,0.08), rgba(255,255,255,0.18)),
+        radial-gradient(circle at 60% 40%, rgba(37,95,133,0.22), transparent 48%);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 16px;
+      transform: rotate(-1deg);
+    }
+    .signal-tile {
+      position: relative;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      align-items: end;
+      border-radius: 20px;
+      padding: 10px 12px 12px;
+      min-height: 118px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,253,247,0.94), rgba(246,235,219,0.78)),
+        radial-gradient(circle at 16% 12%, rgba(255,255,255,0.9), transparent 42%);
+      border: 1px solid rgba(24,33,43,0.2);
+      font-weight: 900;
+      color: var(--ink);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        0 14px 26px rgba(64,48,31,0.12);
+    }
+    .signal-tile::after {
+      content: "";
+      position: absolute;
+      inset: auto -18px -30px 28%;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(24,33,43,0.08);
+      filter: blur(12px);
+    }
+    .signal-visual {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 84px;
+      filter: drop-shadow(0 9px 12px rgba(64,48,31,0.16));
+    }
+    .signal-model {
+      background: linear-gradient(180deg, #fafdff, #e8f3f9);
+    }
+    .signal-agent {
+      background: linear-gradient(180deg, #fffaf3, #faead8);
+    }
+    .signal-security {
+      background: linear-gradient(180deg, #fbfff3, #edf3d8);
+    }
+    .signal-threat {
+      background: linear-gradient(180deg, #fff8ff, #f1e3f2);
+    }
+    .signal-tile b {
+      position: relative;
+      z-index: 3;
+      font-size: 0.88rem;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.72);
+    }
+    .panel {
+      padding: 26px;
+      margin-bottom: 18px;
+      background: rgba(255, 251, 243, 0.94);
+    }
+    .report {
+      padding: 0;
+      overflow: hidden;
+      background: rgba(255,250,240,0.72);
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+    h1, h2, h3 {
+      line-height: 1.2;
+      font-family: var(--display);
+      letter-spacing: -0.03em;
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(2.35rem, 6vw, 5.1rem); }
+    h2 { margin: 0 0 14px; font-size: clamp(1.55rem, 3vw, 2.3rem); }
+    h3 { margin: 0 0 10px; font-size: 1.2rem; }
+    p, li { font-size: 1rem; }
+    .lede, .meta { color: var(--muted); }
+    .primary-link {
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .brief-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid rgba(24,33,43,0.18);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(238,246,251,0.72)),
+        var(--panel-strong);
+      box-shadow: 0 18px 34px rgba(64,48,31,0.1);
+      font-size: 1.15rem;
+    }
+    .brief-link strong {
+      color: var(--accent);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .report-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .report-list a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      display: block;
+      font-weight: 750;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .feature-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .info-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(24,33,43,0.18);
+      border-radius: 18px;
+      padding: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(247,239,226,0.84));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        0 14px 30px rgba(64,48,31,0.09);
+    }
+    .info-card::before {
+      content: "";
+      display: block;
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      background: var(--accent);
+    }
+    .feature-grid .info-card:nth-child(4n+1) {
+      background: linear-gradient(180deg, #ffffff, #eef6fb);
+    }
+    .feature-grid .info-card:nth-child(4n+1)::before {
+      background: #255f85;
+    }
+    .feature-grid .info-card:nth-child(4n+2) {
+      background: linear-gradient(180deg, #ffffff, #fff2e2);
+    }
+    .feature-grid .info-card:nth-child(4n+2)::before {
+      background: #9b4d1b;
+    }
+    .feature-grid .info-card:nth-child(4n+3) {
+      background: linear-gradient(180deg, #ffffff, #f2f7df);
+    }
+    .feature-grid .info-card:nth-child(4n+3)::before {
+      background: #58652a;
+    }
+    .feature-grid .info-card:nth-child(4n+4) {
+      background: linear-gradient(180deg, #ffffff, #f7edf8);
+    }
+    .feature-grid .info-card:nth-child(4n+4)::before {
+      background: #733f75;
+    }
+    .info-card h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-family: var(--body);
+      letter-spacing: 0;
+    }
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .report a {
+      color: var(--accent);
+      font-weight: 760;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.16em;
+    }
+    code {
+      background: rgba(31, 41, 51, 0.06);
+      border-radius: 6px;
+      padding: 0.12rem 0.32rem;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #1d242b;
+      color: #f5f7fa;
+      padding: 16px;
+      border-radius: 16px;
+      overflow-x: auto;
+    }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.2rem 0 0.2rem 1rem;
+      border-left: 4px solid var(--accent-soft);
+      color: var(--muted);
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.52);
+    }
+    .score-details {
+      margin-top: 16px;
+    }
+    summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 850;
+    }
+    .brief-header {
+      padding: clamp(24px, 4vw, 44px);
+      background:
+        radial-gradient(circle at 85% 20%, rgba(37,95,133,0.16), transparent 32%),
+        linear-gradient(135deg, rgba(255,250,240,0.98), rgba(246,232,212,0.72));
+      border-bottom: 1px solid var(--line);
+    }
+    .brief-header-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: start;
+    }
+    .brief-date {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: rgba(255,255,255,0.58);
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(92px, 1fr));
+      gap: 10px;
+      min-width: 320px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(255,255,255,0.58);
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.28rem;
+      font-family: var(--display);
+    }
+    .brief-body {
+      padding: clamp(20px, 3vw, 34px);
+      display: grid;
+      gap: 22px;
+    }
+    .brief-section {
+      padding: clamp(18px, 3vw, 26px);
+      box-shadow: none;
+      background: rgba(255, 252, 246, 0.96);
+    }
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      counter-reset: takeaway;
+    }
+    .takeaway-card {
+      counter-increment: takeaway;
+      min-height: 170px;
+      padding: 18px;
+      border: 1px solid rgba(24,33,43,0.18);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(245,235,221,0.78)),
+        radial-gradient(circle at 10% 0%, rgba(184,75,34,0.18), transparent 44%);
+      box-shadow: 0 12px 28px rgba(64,48,31,0.08);
+    }
+    .takeaway-card::before {
+      content: "0" counter(takeaway);
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .takeaway-card p {
+      margin: 0;
+      font-weight: 760;
+      line-height: 1.55;
+    }
+    .brief-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .clean-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .clean-list li {
+      position: relative;
+      padding-left: 18px;
+    }
+    .clean-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .topic-card {
+      border: 1px solid rgba(24,33,43,0.2);
+      border-radius: 24px;
+      background: #fffdf8;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(64,48,31,0.09);
+    }
+    .topic-card header {
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(24,33,43,0.16);
+      background: linear-gradient(135deg, rgba(37,95,133,0.12), rgba(255,255,255,0.62));
+    }
+    .topic-agent header { background: linear-gradient(135deg, rgba(155,77,27,0.16), rgba(255,255,255,0.64)); }
+    .topic-security header { background: linear-gradient(135deg, rgba(88,101,42,0.16), rgba(255,255,255,0.64)); }
+    .topic-threat header { background: linear-gradient(135deg, rgba(115,63,117,0.16), rgba(255,255,255,0.64)); }
+    .topic-card h3 {
+      font-family: var(--body);
+      letter-spacing: 0;
+      margin: 0;
+    }
+    .topic-chip {
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+      background: var(--accent-2);
+    }
+    .topic-model .topic-chip { background: #255f85; }
+    .topic-agent .topic-chip { background: #9b4d1b; }
+    .topic-security .topic-chip { background: #58652a; }
+    .topic-threat .topic-chip { background: #733f75; }
+    .topic-content {
+      padding: 16px 18px 18px;
+    }
+    .topic-items, .related-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .topic-items li {
+      padding: 14px;
+      border-radius: 18px;
+      background: #fff7ea;
+      border: 1px solid rgba(24,33,43,0.12);
+      box-shadow: inset 4px 0 0 rgba(184,75,34,0.32);
+    }
+    .topic-model .topic-items li { box-shadow: inset 4px 0 0 rgba(37,95,133,0.34); }
+    .topic-agent .topic-items li { box-shadow: inset 4px 0 0 rgba(155,77,27,0.34); }
+    .topic-security .topic-items li { box-shadow: inset 4px 0 0 rgba(88,101,42,0.34); }
+    .topic-threat .topic-items li { box-shadow: inset 4px 0 0 rgba(115,63,117,0.34); }
+    .topic-model .topic-items li { background: #eef6fb; }
+    .topic-agent .topic-items li { background: #fff4e7; }
+    .topic-security .topic-items li { background: #f4f7e8; }
+    .topic-threat .topic-items li { background: #f7eef8; }
+    .brief-columns .brief-section:nth-child(1) {
+      background: linear-gradient(180deg, rgba(255,252,246,0.98), rgba(238,246,251,0.82));
+    }
+    .brief-columns .brief-section:nth-child(2) {
+      background: linear-gradient(180deg, rgba(255,252,246,0.98), rgba(255,244,231,0.86));
+    }
+    .related-title {
+      margin: 14px 0 8px;
+      color: var(--muted);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.76rem;
+    }
+    .related-items li {
+      font-size: 0.93rem;
+      color: var(--muted);
+      padding-left: 14px;
+      border-left: 2px solid var(--accent-soft);
+    }
+    .appendix-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .appendix-grid details ul {
+      margin-bottom: 0;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    @media (max-width: 720px) {
+      .shell { width: min(100vw - 20px, 1120px); padding-top: 18px; }
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .brief-hero, .panel, .report, .brief-section { border-radius: 22px; }
+      .brief-hero, .brief-header-grid, .brief-columns, .topic-grid, .takeaway-grid, .info-grid, .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-orbit { min-height: 150px; }
+      .metric-grid { min-width: 0; grid-template-columns: repeat(3, 1fr); }
+      .metric strong { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <a href="../index.html">Home</a>
+      <span class="meta">Published with GitHub Pages</span>
+    </div>
+    <article class='report'>
+<header class='brief-header'>
+<div class='brief-header-grid'>
+<div>
+<p class='eyebrow'>AI Trend Brief</p>
+<h1>AI Trend Report</h1>
+<span class='brief-date'>2026-05-15</span>
+</div>
+<div class='metric-grid'>
+<div class='metric'><span>Codex</span><strong>5</strong></div>
+<div class='metric'><span>LLM Empty</span><strong>1</strong></div>
+<div class='metric'><span>Cutoff</span><strong>55</strong></div>
+</div>
+</div>
+</header>
+<div class='brief-body'>
+<section class='brief-section'>
+<p class='eyebrow'>Top Signals</p>
+<h2>오늘의 핵심 3가지</h2>
+<div class='takeaway-grid'>
+<article class='takeaway-card'><p>보안 영역에서는 멀티모델·멀티에이전트 구조가 주요 벤치마크에서 강한 성능을 보이며, 단일 모델보다 오케스트레이션 설계와 검증 체계의 비중이 커지고 있다.</p></article>
+<article class='takeaway-card'><p>개발 도구는 로컬 모델 연결을 확대하고 있지만, VS Code 사례처럼 인터넷 연결과 유료 구독 제약이 남아 완전한 오프라인 운영 기대와는 거리가 있다.</p></article>
+<article class='takeaway-card'><p>로컬 LLM 활용은 코딩 보조를 넘어 개인 지식관리로 넓어지는 흐름이 보이지만, 실제 경쟁력은 프라이버시 보호와 데이터 연동 완성도에 달려 있다.</p></article>
+</div>
+</section>
+<div class='brief-columns'>
+<section class='brief-section'>
+<p class='eyebrow'>Executive Read</p>
+<h2>핵심 요약</h2>
+<ul class='clean-list'>
+<li>마이크로소프트 관련 두 항목은 보안 자동화 경쟁이 모델 자체보다 다중 에이전트 협업 구조로 이동할 가능성을 시사한다.</li>
+<li>리눅스 권한 상승 취약점 이슈까지 겹치면서, AI 보안 성능 논의와 별개로 기본 패치와 탐지 운영의 중요성이 다시 부각됐다.</li>
+<li>RTX 5000 PRO 사례는 로컬 AI 운용 관심을 뒷받침하지만, 제공된 정보만으로는 기업 도입 판단에 바로 연결할 근거는 제한적이다.</li>
+</ul>
+</section>
+<section class='brief-section'>
+<p class='eyebrow'>Action Points</p>
+<h2>실무 적용 포인트</h2>
+<ul class='clean-list'>
+<li>보안팀은 AI 보안 도입 평가 시 벤치마크 수치만 보지 말고 멀티에이전트 구성, 대응 정확도, 운영 검증 절차를 함께 점검할 필요가 있다.</li>
+<li>개발팀은 로컬 모델 도입 검토 전에 인터넷 의존성, 구독 비용, 보안 격리 요구사항이 배포 정책과 충돌하지 않는지 먼저 확인하는 편이 낫다.</li>
+<li>운영 조직은 Fragnesia 관련 패치 우선순위와 권한 상승 탐지 룰을 재점검해 리눅스 워크로드 노출 범위를 줄여야 한다.</li>
+</ul>
+</section>
+</div>
+<section class='brief-section'>
+<p class='eyebrow'>Topic Radar</p>
+<h2>트렌드 분류</h2>
+<div class='topic-grid'>
+<article class='topic-card topic-model'>
+<header>
+<h3>AI Model</h3>
+<span class='topic-chip'>Model</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>⚡ 중요 <a href="https://www.microsoft.com/en-us/security/blog/2026/05/12/defense-at-ai-speed-microsofts-new-multi-model-agentic-security-system-tops-leading-industry-benchmark/">Microsoft’s new multi-model agentic security system tops leading industry benchmark</a> - 마이크로소프트가 여러 AI 모델을 조합한 에이전트형 보안 시스템을 공개했고, 이 시스템이 주요 업계 벤치마크에서 최고 성능을 기록한 것으로 소개됐다. 기업 보안 운영 측면에서는 위협 탐지와 대응 자동화의 정확도 경쟁이 한층 빨라질 수 있어, 멀티모델 기반 보안 아키텍처와 벤치마크 검증 역량이 도입 판단의 핵심 기준으로 부상할 가능성이 크다. 출처: Reddit.</li>
+<li>📎 참고 <a href="https://www.reddit.com/r/LocalLLaMA/comments/1td53ii/the_rtx_5000_pro_48gb_arrived_and_it_is_better/">The RTX 5000 PRO (48GB) arrived and it is better than I expected.</a> - I posted here about buying it a few days ago: [https://www.reddit.com/r/LocalLLaMA/comments/1t2slmw/first\_time\_gpu\_buyer\_got\_a\_rtx\_5000\_pro\_was\_it\_a/?utm\_source=share&amp;amp;utm\_medium=web3x&amp;amp;utm\_name=web3xcss&amp;amp;utm\_term=1&amp;amp;utm\_content=share\_button](https:// 출처: Reddit.</li>
+</ul>
+<p class='related-title'>Related Signals</p>
+<ul class='related-items'>
+<li><a href="https://code.visualstudio.com/docs/copilot/customization/language-models">VS Code&#x27;s new &quot;Agents window&quot; lets you use local AI models. Still requires an Internet connection and a Github Copilot plan (because we can&#x27;t have nice things)</a> - Reddit · 총점 88</li>
+<li><a href="https://www.geekwire.com/2026/microsofts-multi-agent-ai-system-tops-anthropics-mythos-on-cybersecurity-benchmark/">Microsoft&#x27;s multi-agent AI system tops Anthropic&#x27;s Mythos on cybersecurity benchmark</a> - Reddit · 총점 87</li>
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tcrtt6/anyone_actually_using_a_local_llm_as_their_daily/">Anyone actually using a local LLM as their daily knowledge base? Not for coding, for life stuff. What&#x27;s your setup?</a> - Reddit · 총점 78</li>
+<li><a href="https://github.com/nirholas/three.ws">nirholas/three.ws</a> - Discovery: GitHub Search · 총점 75</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-agent'>
+<header>
+<h3>AI Agent</h3>
+<span class='topic-chip'>Agent</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>⚡ 중요 <a href="https://code.visualstudio.com/docs/copilot/customization/language-models">VS Code&#x27;s new &quot;Agents window&quot; lets you use local AI models. Still requires an Internet connection and a Github Copilot plan (because we can&#x27;t have nice things)</a> - VS Code가 새 ‘Agents window’를 통해 로컬 AI 모델을 에이전트 작업에 연결할 수 있게 했지만, 실제 사용에는 인터넷 연결과 GitHub Copilot 구독이 여전히 필요하다는 점이 함께 부각됐다. 기업과 개발팀 입장에서는 로컬 모델 활용 범위가 넓어질 수 있어도 완전한 오프라인 운영이나 비용 절감, 보안 격리 목적의 도입에는 제약이 남아 도구 선택과 배포 정책을 다시 따져봐야 한다. 출처: Reddit.</li>
+<li>⚡ 중요 <a href="https://www.geekwire.com/2026/microsofts-multi-agent-ai-system-tops-anthropics-mythos-on-cybersecurity-benchmark/">Microsoft&#x27;s multi-agent AI system tops Anthropic&#x27;s Mythos on cybersecurity benchmark</a> - 마이크로소프트의 멀티에이전트 AI 시스템이 사이버보안 벤치마크에서 앤스로픽의 Mythos를 앞섰다는 소식으로, 보안 업무에서도 여러 에이전트를 협업시키는 구조의 성능 우위가 부각됐다. 기업 입장에서는 보안 탐지·분석·대응 자동화 설계에서 단일 모델 성능보다 멀티에이전트 오케스트레이션과 검증 체계를 함께 평가해야 할 가능성이 커졌다. 출처: Reddit.</li>
+<li>⚡ 중요 <a href="https://www.reddit.com/r/LocalLLaMA/comments/1tcrtt6/anyone_actually_using_a_local_llm_as_their_daily/">Anyone actually using a local LLM as their daily knowledge base? Not for coding, for life stuff. What&#x27;s your setup?</a> - 레딧에서는 코딩이 아닌 일상 정보 관리 용도로 로컬 LLM을 개인 지식베이스처럼 쓰는 사례와 구성 방식에 대한 수요가 제기됐다. 이는 AI 모델과 에이전트 활용이 개발 지원을 넘어 개인 기록, 검색, 정리 자동화 쪽으로 확장될 가능성을 보여줘 로컬 데이터 연동, 프라이버시 보호, 워크플로 통합 기능의 경쟁력에 직접 영향을 준다. 출처: Reddit.</li>
+</ul>
+<p class='related-title'>Related Signals</p>
+<ul class='related-items'>
+<li><a href="https://github.com/nirholas/three.ws">nirholas/three.ws</a> - Discovery: GitHub Search · 총점 75</li>
+<li><a href="https://github.com/rohitg00/agentmemory">rohitg00/agentmemory</a> - GitHub Trending · 총점 69</li>
+<li>[Continual Harness: Online Adaptation for Self-Improving Foundation Agents [R]](https://www.reddit.com/r/MachineLearning/comments/1tcmj6v/continual_harness_online_adaptation_for/) - Reddit · 총점 66</li>
+<li><a href="https://github.com/ruvnet/RuView">ruvnet/RuView</a> - GitHub Trending · 총점 55</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-security'>
+<header>
+<h3>Security</h3>
+<span class='topic-chip'>Security</span>
+</header>
+<div class='topic-content'>
+<p class='muted'>이번 상위 항목에는 포함되지 않았습니다.</p>
+<p class='related-title'>Related Signals</p>
+<ul class='related-items'>
+<li><a href="https://www.reddit.com/r/cybersecurity/comments/1tcxech/level_effect_ama_former_nsa_operators_turned_edr/">Level Effect AMA! Former NSA Operators turned EDR developers and trainers in 2020. We’ve seen a lot of trends over the years and want to start being active in r/cybersecurity giving back. Ask us anything!</a> - Reddit · 총점 52</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-threat'>
+<header>
+<h3>Threat Modeling</h3>
+<span class='topic-chip'>Threat</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>이번 상위 항목에는 포함되지 않았습니다.</li>
+</ul>
+</div>
+</article>
+<article class='topic-card topic-other'>
+<header>
+<h3>Uncategorized</h3>
+<span class='topic-chip'>Uncategorized</span>
+</header>
+<div class='topic-content'>
+<ul class='topic-items'>
+<li>📎 참고 <a href="https://www.bleepingcomputer.com/news/security/new-fragnesia-linux-flaw-lets-attackers-gain-root-privileges/">New Fragnesia Linux flaw lets attackers gain root privileges</a> - 새로운 리눅스 취약점 ‘Fragnesia’가 공개되면서 공격자가 시스템에서 루트 권한을 획득할 수 있는 경로가 드러났고, 보안 커뮤니티에서 관련 위험이 빠르게 확산되고 있다. 운영 측면에서는 리눅스 서버와 워크로드 전반에 대한 권한 상승 점검, 패치 적용 우선순위 재조정, 탐지 룰 보강이 필요해 침해 시 전체 시스템 장악으로 이어질 가능성에 선제 대응해야 한다. 출처: Reddit.</li>
+</ul>
+</div>
+</article>
+</div>
+</section>
+<div class='brief-columns'>
+<section class='brief-section'>
+<p class='eyebrow'>Contrast</p>
+<h2>비교</h2>
+<ul class='clean-list'>
+<li>보안 분야에서는 멀티모델·멀티에이전트가 성능 우위를 강조한 반면, 개발 도구 분야의 로컬 모델 지원은 여전히 연결성과 과금 제약을 안고 있다.</li>
+<li>로컬 LLM 수요는 개인 지식베이스처럼 활용 범위를 넓히고 있지만, 보안 영역의 사례들처럼 아직 검증 체계가 전면에 나온 단계는 아니다.</li>
+</ul>
+</section>
+<section class='brief-section'>
+<p class='eyebrow'>Implications</p>
+<h2>의미 분석</h2>
+<ul class='clean-list'>
+<li>기업의 AI 도입 기준은 단순 모델 성능 비교에서 벗어나 오케스트레이션, 운영 제약, 보안 통제까지 함께 보는 방향으로 옮겨갈 가능성이 크다.</li>
+<li>로컬 AI 전략은 비용 절감이나 폐쇄망 대응만으로 정당화되기 어렵고, 실제 운영 조건과 사용자 워크플로 적합성을 먼저 입증해야 한다.</li>
+</ul>
+</section>
+</div>
+<section class='brief-section'>
+<p class='eyebrow'>Appendix</p>
+<h2>점수와 디버깅</h2>
+<div class='appendix-grid'>
+<details><summary>점수 현황 펼치기</summary><ul>
+<li>리포트 포함 기준: score &gt;= 55, 최대 6개</li>
+<li>동적 기준: 기본 하한 50점과 당일 후보 상위 75퍼센타일 점수 55점 중 더 높은 값을 사용합니다.</li>
+<li>선정 방식: 기준점 이상 항목 중 토픽별 대표 후보를 먼저 포함하고, 토픽별 최대 2개까지 총점순으로 채웁니다.</li>
+<li>점수 구성: 출처 가중치, 최신성, 인기도, 토픽 매칭, 실용성, 신규성, 교차출처, Discovery/Watchlist 신뢰도를 합산하고 Discovery 불확실성은 감점합니다.</li>
+<li>[포함] VS Code&#x27;s new &quot;Agents window&quot; lets you use local AI models. Still requires an Internet connection and a Github Copilot plan (because we can&#x27;t have nice things) | 총점=88, 실용성=14, 신규성=10, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] Microsoft&#x27;s multi-agent AI system tops Anthropic&#x27;s Mythos on cybersecurity benchmark | 총점=87, 실용성=16, 신규성=4, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] Anyone actually using a local LLM as their daily knowledge base? Not for coding, for life stuff. What&#x27;s your setup? | 총점=78, 실용성=14, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] The RTX 5000 PRO (48GB) arrived and it is better than I expected. | 총점=67, 실용성=4, 신규성=5, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] Microsoft’s new multi-model agentic security system tops leading industry benchmark | 총점=67, 실용성=16, 신규성=9, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[포함] New Fragnesia Linux flaw lets attackers gain root privileges | 총점=57, 실용성=0, 신규성=5, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] nirholas/three.ws | 총점=75, 실용성=20, 신규성=0, 교차출처=0, 출처신뢰=4, Discovery감점=4</li>
+<li>[제외] rohitg00/agentmemory | 총점=69, 실용성=15, 신규성=4, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] Continual Harness: Online Adaptation for Self-Improving Foundation Agents [R] | 총점=66, 실용성=17, 신규성=10, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] NVFP4 Kimi2.6 and Kimi 2.5 released by Nvidia | 총점=63, 실용성=0, 신규성=5, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] Multi-Token Prediction (MTP) for Qwen on LLaMA.cpp + TurboQuant | 총점=56, 실용성=4, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] ruvnet/RuView | 총점=55, 실용성=5, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] obra/superpowers | 총점=55, 실용성=5, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>[제외] K-Dense-AI/scientific-agent-skills | 총점=55, 실용성=5, 신규성=0, 교차출처=0, 출처신뢰=0, Discovery감점=0</li>
+<li>제외 항목 41개는 점수표에서 생략했습니다. 주요 후보는 아래 &#x27;주목할 만한 제외 항목&#x27;을 확인하세요.</li>
+</ul></details>
+<details><summary>주목할 만한 제외 항목 펼치기</summary><ul>
+<li><a href="https://github.com/nirholas/three.ws">nirholas/three.ws</a> - 총점 75점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+<li><a href="https://github.com/rohitg00/agentmemory">rohitg00/agentmemory</a> - 총점 69점으로 기준에 근접했습니다. 도구 사용이나 권한 설계 관점에서 별도 추적할 만합니다.</li>
+</ul></details>
+<details><summary>링크 펼치기</summary><ul>
+<li><a href="https://www.microsoft.com/en-us/security/blog/2026/05/12/defense-at-ai-speed-microsofts-new-multi-model-agentic-security-system-tops-leading-industry-benchmark/">Microsoft’s new multi-model agentic security system tops leading industry benchmark</a></li>
+<li><a href="https://code.visualstudio.com/docs/copilot/customization/language-models">VS Code&#x27;s new &quot;Agents window&quot; lets you use local AI models. Still requires an Internet connection and a Github Copilot plan (because we can&#x27;t have nice things)</a></li>
+<li><a href="https://www.geekwire.com/2026/microsofts-multi-agent-ai-system-tops-anthropics-mythos-on-cybersecurity-benchmark/">Microsoft&#x27;s multi-agent AI system tops Anthropic&#x27;s Mythos on cybersecurity benchmark</a></li>
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1td53ii/the_rtx_5000_pro_48gb_arrived_and_it_is_better/">The RTX 5000 PRO (48GB) arrived and it is better than I expected.</a></li>
+<li><a href="https://www.bleepingcomputer.com/news/security/new-fragnesia-linux-flaw-lets-attackers-gain-root-privileges/">New Fragnesia Linux flaw lets attackers gain root privileges</a></li>
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tcrtt6/anyone_actually_using_a_local_llm_as_their_daily/">Anyone actually using a local LLM as their daily knowledge base? Not for coding, for life stuff. What&#x27;s your setup?</a></li>
+</ul></details>
+<details><summary>디버깅 정보 펼치기</summary><ul>
+<li>OpenAI API 실패 정보:</li>
+<li>OPENAI_API_KEY missing: 5개</li>
+<li>선택 항목별 실패 정보:</li>
+<li>Microsoft’s new multi-model agentic security system tops leading industry benchmark: OpenAI=OPENAI_API_KEY missing</li>
+<li>VS Code&#x27;s new &quot;Agents window&quot; lets you use local AI models. Still requires an Internet connection and a Github Copilot plan (because we can&#x27;t have nice things): OpenAI=OPENAI_API_KEY missing</li>
+<li>Microsoft&#x27;s multi-agent AI system tops Anthropic&#x27;s Mythos on cybersecurity benchmark: OpenAI=OPENAI_API_KEY missing</li>
+<li>New Fragnesia Linux flaw lets attackers gain root privileges: OpenAI=OPENAI_API_KEY missing</li>
+<li>Anyone actually using a local LLM as their daily knowledge base? Not for coding, for life stuff. What&#x27;s your setup?: OpenAI=OPENAI_API_KEY missing</li>
+<li>_Generated at 2026-05-15T11:49:01.789767._</li>
+</ul></details>
+</div>
+</section>
+</div>
+</article>
+  </main>
+</body>
+</html>
